@@ -5,9 +5,9 @@ var webpack = require('webpack');
  */
 var config = {
   devtool: 'eval-source-map',
-  entry: __dirname + "/app/App.js",
+  entry: __dirname + "/app/App.jsx",
   output: {
-    path: __dirname + "/public",
+    path: __dirname + "/django_photo_application/static/js",
     filename: "bundle.js"
   },
   module: {
@@ -25,6 +25,12 @@ var config = {
     colors: true,
     historyApiFallback: true,
     inline: true
+  },
+
+  // Important! Do not remove ''. If you do, imports without
+  // an extension won't work anymore!
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   },
 }
 
