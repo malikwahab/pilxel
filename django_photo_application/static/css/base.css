@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: "Helvetica"
+}
+.container.landing-container {
+    background: url('../img/background_image.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 30px;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+.landing {
+    border: 4px solid #fff;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    display: block;
+    color: #fff;
+    background: url('../img/logo.png') no-repeat center center fixed;
+    width: 500px;
+    height: 75%;
+    margin: 0 auto;
+}
+
+.landing-button-container {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.landing .row {
+    height: 100%;
+}
+a.pilxel-button {
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 0px;
+    color: #fff;
+    margin: 10px;
+}
+
+a.pilxel-button:hover {
+    color: #fff;
+}
