@@ -1,15 +1,19 @@
-import { TOGGLE_LOGIN, TOGGLE_SIGNUP } from '../constants'
+import { TOGGLE_LOGIN, TOGGLE_SIGNUP, LOGIN_SUCCESS } from '../constants';
 
-const initalState = {
+const initialState = {
     loginShow: false,
     signUpShow: false,
-    langingElementShow: true
+    LandingButtonShow: true
 }
 
-export const showLogin = ( state = initalState, action ) => {
+export const showLogin = ( state = initialState, action ) => {
   switch(action.type){
     case TOGGLE_LOGIN:
-      return Object.assign({}, state, {loginShow: !state.loginShow, langingElementShow: !state.langingElementShow});
+      return Object.assign({}, state, {loginShow: !state.loginShow, LandingButtonShow: !state.LandingButtonShow});
+    case TOGGLE_SIGNUP:
+      return Object.assign({}, state, {signUpShow: !state.signUpShow, LandingButtonShow: !state.LandingButtonShow});
+    case LOGIN_SUCCESS:
+      return Object.assign({}, state, {token: action.token, loginShow: !state.loginShow});
     default:
       return state;
   }

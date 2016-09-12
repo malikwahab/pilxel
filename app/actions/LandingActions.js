@@ -7,5 +7,10 @@ export const LandingActionCreator = {
         return {
             type: TOGGLE_LOGIN
         }
+    },
+    toggleSignUp(){
+        return {
+            type: TOGGLE_SIGNUP
+        }
     }
 }

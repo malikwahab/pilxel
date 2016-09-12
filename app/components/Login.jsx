@@ -1,61 +1,72 @@
-import React, { Component, PropTypes } from 'react';
-import { Row, Col, Form, FormControl, FormGroup, Button } from 'react-bootstrap';
-import { LandingActionCreator } from '../actions/LandingActions';
-import { connect } from 'react-redux';
-
+import React, {Component, PropTypes} from 'react';
+import {
+  Row,
+  Col,
+  Form,
+  FormControl,
+  FormGroup,
+  Button
+} from 'react-bootstrap';
+import {LandingActionCreator} from '../actions/LandingActions';
+import {connect} from 'react-redux';
+import AuthenticationActionCreator from '../actions/AuthenticationActionCreator';
 
 class Login extends Component {
-  constructor(){
-      super();
-      this.state = {
-          name: "",
-          password: ""
-      }
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      password: ""
+    }
+  }
+
+  handleFieldChange(event) {
+    event.preventDefault();
+    let key = event.target.name;
+    let value = event.target.value;
+    this.setState({[key]: value});
   }
   render() {
     return (
-    <Form action="post">
-      <FormGroup controlId="formControlsText">
-        <Col sm={10}>
+      <Form action="post" onSubmit={this.props.onSubmit.bind(null, this.state)}>
+        <FormGroup controlId="formControlsText">
           <FormControl
             type="text"
             required={true}
             placeholder="Username"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleFieldChange}/>
-        </Col>
-      </FormGroup>
+            name="username"
+            value={this.state.username}
+            onChange={this.handleFieldChange.bind(this)}/>
+        </FormGroup>
 
-      <FormGroup controlId="formControlsText">
-        <Col sm={10}>
+        <FormGroup controlId="formControlsText">
           <FormControl
             type="password"
             required={true}
             placeholder="Password"
             name="password"
             value={this.state.password}
-            onChange={this.handleFieldChange}/>
-        </Col>
-      </FormGroup>
-      <Button type="submit" id="contact" type="submit" className="btn pilxel-button">Send Message</Button>
-      <a className="pilxel-button btn" onClick={this.props.hideLogin}>
-        Cancel Login
-      </a>
-    </Form>
+            onChange={this.handleFieldChange.bind(this)}/>
+        </FormGroup>
+        <a className="btn pilxel-button" onClick={this.props.onSubmit.bind(null, this.state)}>Login</a>
+        <a className="pilxel-button btn" onClick={this.props.hideLogin}>
+          Cancel Login
+        </a>
+      </Form>
     )
   }
 }
 
 Login.propTypes = {
-    hideLogin: PropTypes.func
+  hideLogin: PropTypes.func,
+  onSubmit: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        hideLogin: () => dispatch(LandingActionCreator.toggleLogin())
-    }
+  return {
+    hideLogin: () => dispatch(LandingActionCreator.toggleLogin()),
+    onSubmit: (credentials) => dispatch(AuthenticationActionCreator.login(credentials))
+  }
 }
 
-const LoginContainer = connect(null, mapDispatchToProps)(Login);
-export default LoginContainer;
+export default connect(null, mapDispatchToProps)(Login);
