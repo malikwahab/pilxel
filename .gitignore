@@ -3,4 +3,5 @@ npm-debug.log
 .DS_Store
 venv
 *.pyc
+django_photo_application/.coverage
 django_photo_application/staticfiles/
