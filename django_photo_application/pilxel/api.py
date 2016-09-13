@@ -4,7 +4,7 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from rest_framework import filters, permissions, status, viewsets
+from rest_framework import filters, permissions, status, viewsets, mixins
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 
@@ -16,7 +16,7 @@ from image_transformation.manipulate import ManipulateImage
 from PIL import Image
 from pilxel.filters import IsImageOwnerFilter
 from pilxel.models import ImageModel
-from pilxel.permissions import IsOwner
+from pilxel.permissions import IsOwner, IsImageOwner
 from pilxel.serializers import ImageSerializer
 from rest_auth.registration.views import SocialLoginView
 
@@ -86,3 +86,37 @@ class ImageViewSet(viewsets.ModelViewSet):
         response = Response()
         response.status_code = status.HTTP_400_BAD_REQUEST
         return response
+
+
+class ImageDetailsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+
+    queryset = ImageModel.objects.all()
+    permission_classes = (permissions.IsAuthenticated, IsImageOwner)
+
+    def retrieve(self, request, pk):
+        queryset = ImageModel.objects.all()
+        image_obj = get_object_or_404(queryset, pk=pk)
+        image = Image.open(image_obj.image)
+        image_details = {
+            "name": image_obj.name,
+            "size": ImageDetailsViewSet.format_bytes(image_obj.image.size),
+            "width": image.width,
+            "height": image.height,
+            "date_created": image_obj.date_created,
+            "date_modified": image_obj.date_modified,
+        }
+        response = Response()
+        response.data = image_details
+        response.status_code = status.HTTP_200_OK
+        return response
+
+    @staticmethod
+    def format_bytes(bytes_num):
+        sizes = ["B", "Kb", "Mb"]
+        i = 0
+        dblbyte = bytes_num
+        while (i < len(sizes) and bytes_num >= 1024):
+            dblbyte = bytes_num / 1024.0
+            i = i + 1
+            bytes_num = bytes_num / 1024
+        return str(round(dblbyte, 2)) + " " + sizes[i]

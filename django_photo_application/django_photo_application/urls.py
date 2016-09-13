@@ -14,13 +14,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from pilxel.api import FacebookLogin, ImageViewSet
+from pilxel.api import FacebookLogin, ImageViewSet, ImageDetailsViewSet
 from rest_framework import routers
 from rest_framework_jwt.views import refresh_jwt_token, verify_jwt_token
 
 
 router = routers.DefaultRouter()
 router.register(r'images', ImageViewSet, base_name='image')
+router.register(r'image-details', ImageDetailsViewSet,
+                base_name="image-details")
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
