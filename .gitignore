@@ -5,3 +5,4 @@ venv
 *.pyc
 django_photo_application/.coverage
 django_photo_application/staticfiles/
+django_photo_application/media/
