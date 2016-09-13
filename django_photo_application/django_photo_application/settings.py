@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # nose for testing
+    'django_nose',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -47,6 +49,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+# nose testing
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'  # set nose as test runner
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=pilxel',
+]
 
 ROOT_URLCONF = 'django_photo_application.urls'
 
