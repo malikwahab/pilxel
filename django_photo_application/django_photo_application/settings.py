@@ -106,7 +106,7 @@ WSGI_APPLICATION = 'django_photo_application.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pilxel_test',
+        'NAME': 'pilxel',
     }
 }
 
