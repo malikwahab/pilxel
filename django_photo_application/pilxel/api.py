@@ -14,10 +14,10 @@ from image_transformation.enhancement import Enhancement
 from image_transformation.filters import FilterImage
 from image_transformation.manipulate import ManipulateImage
 from PIL import Image
-from pilxel.filters import IsImageOwnerFilter
-from pilxel.models import ImageModel
+from pilxel.filters import IsImageOwnerFilter, IsFolderOwnerFilter
+from pilxel.models import ImageModel, FolderModel
 from pilxel.permissions import IsOwner, IsImageOwner
-from pilxel.serializers import ImageSerializer
+from pilxel.serializers import ImageSerializer, FolderSerializer
 from rest_auth.registration.views import SocialLoginView
 
 
@@ -120,3 +120,14 @@ class ImageDetailsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
             i = i + 1
             bytes_num = bytes_num / 1024
         return str(round(dblbyte, 2)) + " " + sizes[i]
+
+
+class FolderViewSet(viewsets.ModelViewSet):
+
+    queryset = FolderModel.objects.all()
+    permission_classes = (permissions.IsAuthenticated, IsOwner)
+    filter_backends = (filters.SearchFilter, IsFolderOwnerFilter, )
+    serializer_class = FolderSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
