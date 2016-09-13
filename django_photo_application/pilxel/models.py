@@ -20,3 +20,13 @@ class BaseModel(models.Model):
     class Meta:
         ordering = ('date_modified',)
         abstract = True
+
+
+class ImageModel(BaseModel):
+
+    owner = models.ForeignKey(
+        'auth.User', on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(
+        upload_to=upload_directory_path, blank=True, null=True)
+    folder = models.ForeignKey(FolderModel, on_delete=models.CASCADE,
+                               related_name='images', blank=True, null=True)
