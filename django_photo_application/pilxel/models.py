@@ -22,6 +22,11 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class FolderModel(BaseModel):
+
+    owner = models.ForeignKey('auth.User', related_name='folder')
+
+
 class ImageModel(BaseModel):
 
     owner = models.ForeignKey(
@@ -30,8 +35,3 @@ class ImageModel(BaseModel):
         upload_to=upload_directory_path, blank=True, null=True)
     folder = models.ForeignKey(FolderModel, on_delete=models.CASCADE,
                                related_name='images', blank=True, null=True)
-
-
-class FolderModel(BaseModel):
-
-    owner = models.ForeignKey('auth.User', related_name='folder')
