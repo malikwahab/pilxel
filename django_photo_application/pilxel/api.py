@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from io import BytesIO
 
 from django.core.files.base import ContentFile
@@ -102,8 +103,10 @@ class ImageDetailsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
             "size": ImageDetailsViewSet.format_bytes(image_obj.image.size),
             "width": image.width,
             "height": image.height,
-            "date_created": image_obj.date_created,
-            "date_modified": image_obj.date_modified,
+            "date_created": image_obj.date_created
+                                     .strftime('%b %d, %Y %I:%M %p'),
+            "date_modified": image_obj.date_modified
+                                      .strftime('%b %d, %Y %I:%M %p'),
         }
         response = Response()
         response.data = image_details

@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { Grid, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import SideBar from './SideBar';
+import PilxelContent from './PilxelContent';
+import Navigation from './Navigation';
 
 
 class PhotoEditor extends Component {
     render(){
         return (
-            <Grid>
-                <Row className="show-grid" >
-                    <h1> PhotoEditor </h1>
-                </Row>
-            </Grid>
+            <div>
+                <Navigation />
+                <SideBar />
+                <PilxelContent />
+            </div>
         )
     }
 }

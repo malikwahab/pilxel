@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: "Helvetica"
 }
+
 .container.landing-container {
     background: url('../img/background_image.png') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -62,7 +63,193 @@ body {
     margin: 10px;
 }
 
-.form-contro::-webkit-input-placeholder { color: #fff; }
-.form-control:-moz-placeholder { color: #fff; }
-.form-control::-moz-placeholder { color: #fff; }
-.form-control:-ms-input-placeholder { color: #fff; }
+
+/* side bar */
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.50);
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 50px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar-nav .link-text {
+    display: inline-block;
+    width: 120px;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.img-btn {
+    padding-top: 15px;
+}
+
+.img-btn .glyphicon-edit {
+    margin-right: 45px;
+}
+
+.img-btn .glyphicon-trash {
+    float: right;
+    color: red;
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.modal-dialog {
+    width: 800px;
+}
+
+.img-info ul {
+    list-style: none;
+    border-left: 1px solid #999;
+}
+
+.img-info li {
+    margin-bottom: 15px;
+}
+
+.img-details-title {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+}
+
+.img-info-container img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image-info-btn {
+    padding-top: 20px;
+}
+
+.image-info-btn .btn {
+    margin-left: 20px;
+}
+
+.image-info-edit-btn, .image-info-edit-btn:hover {
+    background-color: #4A90E2;
+    border-color: #4A90E2;
+    color: #fff;
+}
+
+.image-info-edit-btn:focus, .image-info-edit-btn:active, .image-info-edit-btn:active:focus {
+    background-color: #4A70E2;
+    border-color: #4A70E2;
+    color: #fff;
+}
+
+.page-content-wrapper {
+    position: absolute;
+    left: 250px;
+    padding: 20px;
+    width: 75%;
+    top: 50px;
+}
+
+.edit-image-modal .modal-content {
+    background-color: #333;
+    color: #fff;
+}
+
+.edit-image-modal .modal-header button span {
+    color: #fff;
+}
+
+.edit-btn-container {
+    text-align: center;
+}
+
+.edit-btn {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+}
+
+.edit-btn .material-icons {
+    font-size: 50px;
+}
+
+.edit-btn-title {
+    text-align: center;
+    display: block;
+    font-size: 12px;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-default {
+    background-color: #4A90E2;
+    border-color: #4A90E2;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand, .navbar-default .navbar-nav>.open>a:hover {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-nav>li>a:hover {
+    color: #555;
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+}
+
+.img-container {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.50);
+    padding: 10px;
+    cursor: pointer;
+    width: 148px;
+    margin-bottom: 50px;
+}
+
+.form-contro::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.form-control:-moz-placeholder {
+    color: #fff;
+}
+
+.form-control::-moz-placeholder {
+    color: #fff;
+}
+
+.form-control:-ms-input-placeholder {
+    color: #fff;
+}

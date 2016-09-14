@@ -24,7 +24,7 @@ let AuthenticateAPI = {
       },
       body: JSON.stringify(credentials)
     }
-    return fetch('http://localhost:8888/api/v1/auth/login/', config)
+    return fetch('/api/v1/auth/login/', config)
       .then(checkStatus)
       .then(parseJSON)
       .then((data) => localStorage.setItem('token', data.token));
@@ -46,4 +46,17 @@ let AuthenticateAPI = {
   },
 };
 
+export const ImageAPI = {
+    getImageDetails(id) {
+      let config = {
+        method: 'get',
+        headers: {
+          'Authorization': 'JWT ' + localStorage.getItem('token')
+        }
+      }
+      return fetch(`/api/v1/image-details/${id}/`, config)
+        .then(checkStatus)
+        .then(parseJSON)
+    },
+}
 export default AuthenticateAPI;
