@@ -99,6 +99,14 @@ body {
     color: #999999;
 }
 
+.img-container {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
+    padding: 10px;
+    cursor: pointer;
+    width: 148px;
+    margin-bottom: 50px;
+}
+
 .img-btn {
     padding-top: 15px;
 }
@@ -141,7 +149,7 @@ body {
     font-weight: bold;
 }
 
-.img-info-container img {
+.modal-body img {
     max-width: 100%;
     max-height: 100%;
 }
@@ -183,14 +191,22 @@ body {
     color: #fff;
 }
 
+.edit-image-modal .modal-dialog {
+    width: 500px;
+}
 .edit-btn-container {
     text-align: center;
+    padding-top: 10px;
 }
 
 .edit-btn {
     display: inline-block;
     width: 60px;
     text-align: center;
+    cursor: pointer;
+}
+.edit-btn:hover {
+    color: #bebebe;
 }
 
 .edit-btn .material-icons {
@@ -201,6 +217,11 @@ body {
     text-align: center;
     display: block;
     font-size: 12px;
+}
+
+.img-edit-container {
+    padding: 50px;
+    border-bottom: 1px solid #fff;
 }
 
 .navbar {
@@ -228,14 +249,6 @@ body {
 
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
     color: #fff;
-}
-
-.img-container {
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.50);
-    padding: 10px;
-    cursor: pointer;
-    width: 148px;
-    margin-bottom: 50px;
 }
 
 .form-contro::-webkit-input-placeholder {

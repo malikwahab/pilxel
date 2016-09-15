@@ -1,11 +1,10 @@
 import { SHOW_INFO_MODAL, CLOSE_INFO_MODAL, IMAGE_DETAILS_SUCCESS,
-  SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL } from '../constants';
+  SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, IMAGE_EDIT_SUCCESS } from '../constants';
 
 const initialState = {
   infoModalShow: false,
   editModalShow: false,
   currentInfoImage: null,
-  currentEditImage: null,
   imageDetails: {}
 }
 
@@ -19,7 +18,7 @@ export const modalShow = (state = initialState, action) => {
   case IMAGE_DETAILS_SUCCESS:
     return Object.assign({}, state, { imageDetails: action.details });
   case SHOW_EDIT_MODAL:
-    return Object.assign({}, state, { editModalShow: true, infoModalShow: false, currentEditImage: action.currentImage });
+    return Object.assign({}, state, { editModalShow: true, infoModalShow: false});
   case CLOSE_EDIT_MODAL:
     return Object.assign({}, state, { editModalShow: false });
   default:

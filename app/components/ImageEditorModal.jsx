@@ -13,7 +13,7 @@ class ImageEditorModal extends Component {
               </Modal.Header>
               <Modal.Body>
                 <div className="img-edit-container">
-                  <img src="{this.props.imageSrc}" alt="Image Editor" />
+                  <img src={this.props.imageSrc} alt="Image Editor" />
                 </div>
                 <EditButtons />
               </Modal.Body>
@@ -25,13 +25,13 @@ class ImageEditorModal extends Component {
 ImageEditorModal.proptypes = {
     editModalShow: PropTypes.bool,
     closeEditModal: PropTypes.func,
-    currentImage: PropTypes.string
+    imageSrc: PropTypes.string
 }
 
 const mapStateToProps = (state) => {
     return {
         editModalShow: state.modalShow.editModalShow,
-        currentImage: state.modalShow.currentEditImage
+        imageSrc: state.imageEdit.editImageSrc
     }
 }
 

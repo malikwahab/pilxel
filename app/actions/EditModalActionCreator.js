@@ -1,10 +1,10 @@
-import { SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL} from '../constants';
+import { SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, LOAD_EDIT_IMAGE} from '../constants';
 
 const EditModalActionCreator = {
     showModal(id){
-        return {
-            type: SHOW_EDIT_MODAL,
-            currentImage: id
+        return (dispatch) => {
+          dispatch({type: SHOW_EDIT_MODAL, currentImage: id}),
+          dispatch({type: LOAD_EDIT_IMAGE, currentImage: id})
         }
     },
     closeModal(){
