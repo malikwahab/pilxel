@@ -1,4 +1,4 @@
-import { SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, LOAD_EDIT_IMAGE} from '../constants';
+import { SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, LOAD_EDIT_IMAGE, CLEAR_EDIT_STATE} from '../constants';
 
 const EditModalActionCreator = {
     showModal(id){
@@ -8,10 +8,11 @@ const EditModalActionCreator = {
         }
     },
     closeModal(){
-        return {
-            type: CLOSE_EDIT_MODAL
+        return (dispatch) => {
+            dispatch({type: CLOSE_EDIT_MODAL}),
+            dispatch({type: CLEAR_EDIT_STATE})
         }
-    }
+    },
 }
 
 export default EditModalActionCreator;

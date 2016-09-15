@@ -3,6 +3,7 @@ import { Modal, Glyphicon, Col, Row, Button } from 'react-bootstrap';
 import EditModalActionCreator from '../actions/EditModalActionCreator';
 import { connect } from 'react-redux';
 import EditButtons from './EditButtons';
+import EditActionButtons from './EditActionButtons';
 
 class ImageEditorModal extends Component {
     render(){
@@ -12,6 +13,7 @@ class ImageEditorModal extends Component {
                 <Modal.Title>Edit Image</Modal.Title>
               </Modal.Header>
               <Modal.Body>
+              <EditActionButtons />
                 <div className="img-edit-container">
                   <img src={this.props.imageSrc} alt="Image Editor" />
                 </div>

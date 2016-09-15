@@ -63,48 +63,22 @@ export const ImageAPI = {
   getImageDetails(id) {
     let config = {
       method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: authHeader
     };
     return fetch(`/api/v1/image-details/${id}/`, config)
       .then(checkStatus)
       .then(parseJSON);
   },
-  mirror(id, mirrorState) {
+  editImage(id, editObject) {
     let config = {
       method: "put",
       headers: authHeader,
-      body: JSON.stringify({
-        manipulate: {
-          flip: {
-            mirror: mirrorState
-          }
-        }
-      })
+      body: JSON.stringify(editObject)
     };
     return fetch(`/api/v1/images/${id}/`, config)
       .then(checkStatus)
       .then(responseToBlob)
       .then(loadObjectURL)
   },
-  flip(id, flipState) {
-    let config = {
-      method: "put",
-      headers: authHeader,
-      body: JSON.stringify({
-        manipulate: {
-          flip: {
-            top_bottom: flipState
-          }
-        }
-      })
-    };
-    return fetch(`/api/v1/images/${id}/`, config)
-      .then(checkStatus)
-      .then(responseToBlob)
-      .then(loadObjectURL)
-    },
 }
 export default AuthenticateAPI;

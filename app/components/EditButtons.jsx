@@ -14,11 +14,11 @@ class EditButtons extends Component {
       }, {
         icon: "dns",
         title: "Flip",
-        edit: this.props.flip.bind(this, this.props.currentEditImage, !this.props.currentFlipState)
+        edit: this.props.flip.bind(this, this.props.currentEditImage, !this.props.currentFlipState, this.props.autoSave)
       }, {
         icon: "flip",
         title: "Mirror",
-        edit: this.props.mirror.bind(this, this.props.currentEditImage, !this.props.currentMirrorState)
+        edit: this.props.mirror.bind(this, this.props.currentEditImage, !this.props.currentMirrorState, this.props.autoSave)
       }, {
         icon: "photo_size_select_large",
         title: "Resize",
@@ -51,6 +51,7 @@ EditButtons.proptypes = {
     currentEditImage: PropTypes.string,
     currentMirrorState: PropTypes.bool,
     currentFlipState: PropTypes.bool,
+    autoSave: PropTypes.bool,
     mirror: PropTypes.func,
     flip: PropTypes.func
 }
@@ -59,14 +60,15 @@ const mapStateToProps = (state) => {
     return {
         currentEditImage: state.imageEdit.currentEditImage,
         currentMirrorState: state.imageEdit.currentMirrorState,
-        currentFlipState: state.imageEdit.currentFlipState
+        currentFlipState: state.imageEdit.currentFlipState,
+        autoSave: state.imageEdit.autoSave
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
         mirror: (id, mirrorState) => dispatch(ImageEditActionCreator.mirror(id, mirrorState)),
-        flip: (id, flipState)  => dispatch(ImageEditActionCreator.flip(id, flipState)),
+        flip: (id, flipState, autoSave)  => dispatch(ImageEditActionCreator.flip(id, flipState, autoSave)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditButtons);
