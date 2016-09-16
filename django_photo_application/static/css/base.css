@@ -208,7 +208,7 @@ body {
     cursor: pointer;
 }
 
-.edit-btn:hover {
+.edit-btn:hover, .filter-btn:hover {
     color: #bebebe;
 }
 
@@ -424,6 +424,48 @@ body {
 .auto-save-text {
     font-size: 10px;
     display: inline-block;
+}
+
+.filters .edit-btn {
+    float: left;
+    position: relative;
+    top: 15px;
+}
+
+.filters .edit-btn .material-icons {
+    font-size: 40px;
+}
+
+.filter-btn {
+    display: inline-block;
+    width: 70px;
+    cursor: pointer;
+}
+
+.filter-btn img {
+    width: 60px;
+}
+
+.filter-btn-container {
+    overflow-x: scroll;
+}
+
+.filter-btn-wrapper {
+    width: 1600px;
+    text-align: start;
+}
+
+.filter-btn-container::-webkit-scrollbar {
+    width: 20px;
+}
+
+.filter-btn-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.filter-btn-container::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 
 .navbar {

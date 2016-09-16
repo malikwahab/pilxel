@@ -15,7 +15,8 @@ import {
   TOGGLE_BRIGHTNESS_RANGE,
   TOGGLE_CONTRAST_RANGE,
   TOGGLE_COLOR_RANGE,
-  TOGGLE_SHARPNESS_RANGE
+  TOGGLE_SHARPNESS_RANGE,
+  TOGGLE_FILTERS_SHOW
 } from '../constants';
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   brightnessRangeShow: false,
   colorRangeShow: false,
   contrastRangeShow: false,
+  filtersShow: false,
   sharpnessRangeShow: false,
   autoSave: false
 }
@@ -71,6 +73,8 @@ export const imageEdit = (state = initialState, action) => {
     return Object.assign({}, state, {contrastRangeShow: !state.contrastRangeShow});
   case TOGGLE_SHARPNESS_RANGE:
     return Object.assign({}, state, {sharpnessRangeShow: !state.sharpnessRangeShow});
+  case TOGGLE_FILTERS_SHOW:
+    return Object.assign({}, state, {filtersShow: !state.filtersShow});
   default:
     return state;
   }

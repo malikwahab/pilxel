@@ -11,6 +11,9 @@ class PilxelContent extends Component {
         <Row className="show-grid">
           <ImageContainer id="1"/>
           <ImageContainer id="2"/>
+          <ImageContainer id="3"/>
+          <ImageContainer id="4"/>
+
         </Row>
         <ImageInfoModal/>
         <ImageEditorModal/>

@@ -14,7 +14,8 @@ import {
   TOGGLE_BRIGHTNESS_RANGE,
   TOGGLE_CONTRAST_RANGE,
   TOGGLE_SHARPNESS_RANGE,
-  TOGGLE_COLOR_RANGE
+  TOGGLE_COLOR_RANGE,
+  TOGGLE_FILTERS_SHOW
 } from '../constants';
 import { ImageAPI } from '../api/AppAPI';
 
@@ -111,6 +112,12 @@ const ImageEditActionCreator = {
       dispatch({ type: TOGGLE_COLOR_RANGE });
     };
   },
+  toggleFilterShow() {
+    return (dispatch) => {
+      dispatch({ type: TOGGLE_MAIN_EDIT_BUTTON });
+      dispatch({ type: TOGGLE_FILTERS_SHOW });
+    }
+  },
   convertEnhanceDegree(degree) {
     if (degree < 0) {
       return ((degree + 10) / 10);
@@ -188,6 +195,15 @@ const ImageEditActionCreator = {
       dispatch(this.editImage(id, brightnessObject, autoSave));
     };
   },
+  filter(id, type, autoSave) {
+    return (dispatch) => {
+      const filterObject = {
+        filter: type,
+        save: autoSave
+      };
+      dispatch(this.editImage(id, filterObject, autoSave));
+    };
+  }
 }
 
 export default ImageEditActionCreator;

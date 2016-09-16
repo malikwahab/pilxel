@@ -34,7 +34,7 @@ class EditButtons extends Component {
       }, {
         icon: "filter",
         title: "Filter",
-        edit: this.props.mirror
+        edit: this.props.showFilters
       },
     ];
     return (
@@ -54,7 +54,8 @@ EditButtons.proptypes = {
     autoSave: PropTypes.bool,
     mirror: PropTypes.func,
     flip: PropTypes.func,
-    showAdjustButton: PropTypes.func
+    showAdjustButton: PropTypes.func,
+    showFilters: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
@@ -72,6 +73,7 @@ const mapDispatchToProps = (dispatch) => {
         flip: (id, flipState, autoSave)  => dispatch(ImageEditActionCreator.flip(id, flipState, autoSave)),
         showRotateRange: () => dispatch(ImageEditActionCreator.toggleRotateRange()),
         showAdjustButton: () => dispatch(ImageEditActionCreator.toggleAdjustButtons()),
+        showFilters: () => dispatch(ImageEditActionCreator.toggleFilterShow())
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditButtons);
