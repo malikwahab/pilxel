@@ -8,7 +8,14 @@ import {
   TOGGLE_AUTO_SAVE,
   SAVE_EDIT_STATE,
   CLEAR_EDIT_STATE,
-  IMAGE_SAVE_SUCCESS
+  IMAGE_SAVE_SUCCESS,
+  TOGGLE_MAIN_EDIT_BUTTON,
+  TOGGLE_ROTATE_RANGE,
+  TOGGLE_ADJUST_BUTTONS,
+  TOGGLE_BRIGHTNESS_RANGE,
+  TOGGLE_CONTRAST_RANGE,
+  TOGGLE_COLOR_RANGE,
+  TOGGLE_SHARPNESS_RANGE
 } from '../constants';
 
 const initialState = {
@@ -17,6 +24,14 @@ const initialState = {
   editImageSrc: '',
   editingImage: false,
   editObject: null,
+  mainEditbtnShow: true,
+  rotateRangeShow: false,
+  adjustButtonsShow: false,
+  contrastRangeShow: false,
+  brightnessRangeShow: false,
+  colorRangeShow: false,
+  contrastRangeShow: false,
+  sharpnessRangeShow: false,
   autoSave: false
 }
 
@@ -40,6 +55,22 @@ export const imageEdit = (state = initialState, action) => {
     return Object.assign({}, state, { editObject: action.editObject});
   case IMAGE_SAVE_SUCCESS:
     return Object.assign({}, state, { editObject: null});
+  case TOGGLE_MAIN_EDIT_BUTTON:
+    return Object.assign({}, state, {mainEditbtnShow: !state.mainEditbtnShow});
+  case TOGGLE_ROTATE_RANGE:
+    return Object.assign({}, state, {rotateRangeShow: !state.rotateRangeShow});
+  case IMAGE_EDIT_SUCCESS:
+    return Object.assign({}, state, {editingImage: false, editImageSrc: action.newImageSrc});
+   case TOGGLE_ADJUST_BUTTONS:
+    return Object.assign({}, state, {adjustButtonsShow: !state.adjustButtonsShow});
+  case TOGGLE_BRIGHTNESS_RANGE:
+    return Object.assign({}, state, {brightnessRangeShow: !state.brightnessRangeShow});
+  case TOGGLE_COLOR_RANGE:
+    return Object.assign({}, state, {colorRangeShow: !state.colorRangeShow});
+  case TOGGLE_CONTRAST_RANGE:
+    return Object.assign({}, state, {contrastRangeShow: !state.contrastRangeShow});
+  case TOGGLE_SHARPNESS_RANGE:
+    return Object.assign({}, state, {sharpnessRangeShow: !state.sharpnessRangeShow});
   default:
     return state;
   }

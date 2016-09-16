@@ -29,7 +29,7 @@ class EditActionButtons extends Component {
 EditActionButtons.proptypes = {
     autoSave: PropTypes.bool,
     editObject: PropTypes.object,
-    currentImage: PropTypes.string
+    currentEditImage: PropTypes.string
 }
 
 const mapStateToProps = (state) => {

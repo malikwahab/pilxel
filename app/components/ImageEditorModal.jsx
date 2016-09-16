@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal, Glyphicon, Col, Row, Button } from 'react-bootstrap';
 import EditModalActionCreator from '../actions/EditModalActionCreator';
+import ImageEditActionCreator from '../actions/ImageEditActionCreator';
 import { connect } from 'react-redux';
 import EditButtons from './EditButtons';
 import EditActionButtons from './EditActionButtons';
+import RangeEditButton from './RangeEditButton';
+import AdjustButtons from './AdjustButtons';
 
 class ImageEditorModal extends Component {
     render(){
@@ -17,7 +20,13 @@ class ImageEditorModal extends Component {
                 <div className="img-edit-container">
                   <img src={this.props.imageSrc} alt="Image Editor" />
                 </div>
-                <EditButtons />
+                {this.props.mainEditbtnShow ? <EditButtons /> : null}
+                {this.props.rotateRangeShow ? <RangeEditButton onChangeComplete={this.props.rotateRangeOnChangeComplete} close={this.props.closeRotateRange} min={0} max={360} defaultValue={0}/> : null}
+                {this.props.brightnessRangeShow? <RangeEditButton onChangeComplete={this.props.brightnessRangeOnChangeComplete} close={this.props.closeBrightnessRange} min={-10} max={10} defaultValue={0} /> : null}
+                {this.props.contrastRangeShow? <RangeEditButton onChangeComplete={this.props.contrastRangeOnChangeComplete} close={this.props.closeContrastRange} min={-10} max={10} defaultValue={0} /> : null}
+                {this.props.sharpnessRangeShow? <RangeEditButton onChangeComplete={this.props.sharpnessRangeOnChangeComplete} close={this.props.closeSharpnessRange} min={-10} max={10} defaultValue={0} /> : null}
+                {this.props.colorRangeShow? <RangeEditButton onChangeComplete={this.props.colorRangeOnChangeComplete} close={this.props.closeColorRange} min={-10} max={10} defaultValue={0} /> : null}
+                {this.props.adjustButtonsShow ? <AdjustButtons /> : null }
               </Modal.Body>
             </Modal>
         )
@@ -27,19 +36,47 @@ class ImageEditorModal extends Component {
 ImageEditorModal.proptypes = {
     editModalShow: PropTypes.bool,
     closeEditModal: PropTypes.func,
-    imageSrc: PropTypes.string
+    imageSrc: PropTypes.string,
+    mainEditbtnShow: PropTypes.bool,
+    rotateRangeShow: PropTypes.bool,
+    adjustButtonsShow: PropTypes.bool,
+    brightnessRangeShow: PropTypes.bool,
+    contrastRangeShow: PropTypes.bool,
+    sharpnessRangeShow: PropTypes.bool,
+    colorRangeShow: PropTypes.bool,
+    closeBrightnessRange: PropTypes.func,
+    closeRotateRange: PropTypes.func,
+    rotateRangeOnChangeComplete: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
     return {
         editModalShow: state.modalShow.editModalShow,
-        imageSrc: state.imageEdit.editImageSrc
+        imageSrc: state.imageEdit.editImageSrc,
+        mainEditbtnShow: state.imageEdit.mainEditbtnShow,
+        rotateRangeShow: state.imageEdit.rotateRangeShow,
+        adjustButtonsShow: state.imageEdit.adjustButtonsShow,
+        brightnessRangeShow: state.imageEdit.brightnessRangeShow,
+        contrastRangeShow: state.imageEdit.contrastRangeShow,
+        sharpnessRangeShow: state.imageEdit.sharpnessRangeShow,
+        colorRangeShow: state.imageEdit.colorRangeShow
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        closeEditModal: () => dispatch(EditModalActionCreator.closeModal())
+        closeEditModal: () => dispatch(EditModalActionCreator.closeModal()),
+        closeRotateRange: () => dispatch(ImageEditActionCreator.toggleRotateRange()),
+        closeBrightnessRange: () => dispatch(ImageEditActionCreator.toggleBrightnessRange()),
+        closeContrastRange: () => dispatch(ImageEditActionCreator.toggleContrastRange()),
+        closeSharpnessRange: () => dispatch(ImageEditActionCreator.toggleSharpnessRange()),
+        closeColorRange: () => dispatch(ImageEditActionCreator.toggleColorRange()),
+        rotateRangeOnChangeComplete: (id, degree, autoSave) => dispatch(ImageEditActionCreator.rotate(id, degree, autoSave)),
+        brightnessRangeOnChangeComplete: (id, degree, autoSave) => dispatch(ImageEditActionCreator.brightness(id, degree, autoSave)),
+        contrastRangeOnChangeComplete: (id, degree, autoSave) => dispatch(ImageEditActionCreator.contrast(id, degree, autoSave)),
+        sharpnessRangeOnChangeComplete: (id, degree, autoSave) => dispatch(ImageEditActionCreator.sharpness(id, degree, autoSave)),
+        colorRangeOnChangeComplete: (id, degree, autoSave) => dispatch(ImageEditActionCreator.color(id, degree, autoSave)),
+
     }
 }
 

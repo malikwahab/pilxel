@@ -10,7 +10,7 @@ class EditButtons extends Component {
       {
         icon: "tune",
         title: "Adjust",
-        edit: this.props.mirror
+        edit: this.props.showAdjustButton
       }, {
         icon: "dns",
         title: "Flip",
@@ -26,7 +26,7 @@ class EditButtons extends Component {
       }, {
         icon: "rotate_right",
         title: "Rotate",
-        edit: this.props.mirror
+        edit: this.props.showRotateRange
       }, {
         icon: "crop",
         title: "Crop",
@@ -53,7 +53,8 @@ EditButtons.proptypes = {
     currentFlipState: PropTypes.bool,
     autoSave: PropTypes.bool,
     mirror: PropTypes.func,
-    flip: PropTypes.func
+    flip: PropTypes.func,
+    showAdjustButton: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
@@ -69,6 +70,8 @@ const mapDispatchToProps = (dispatch) => {
     return{
         mirror: (id, mirrorState) => dispatch(ImageEditActionCreator.mirror(id, mirrorState)),
         flip: (id, flipState, autoSave)  => dispatch(ImageEditActionCreator.flip(id, flipState, autoSave)),
+        showRotateRange: () => dispatch(ImageEditActionCreator.toggleRotateRange()),
+        showAdjustButton: () => dispatch(ImageEditActionCreator.toggleAdjustButtons()),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditButtons);

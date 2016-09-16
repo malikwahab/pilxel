@@ -194,6 +194,7 @@ body {
 .edit-image-modal .modal-dialog {
     width: 500px;
 }
+
 .edit-btn-container {
     text-align: center;
     padding-top: 10px;
@@ -206,6 +207,7 @@ body {
     text-align: center;
     cursor: pointer;
 }
+
 .edit-btn:hover {
     color: #bebebe;
 }
@@ -223,59 +225,188 @@ body {
 .img-edit-container {
     padding: 20px;
 }
+
+
 /* switch */
+
 .u-switch {
-  display: inline-block;
-  position: relative;
-  width: 24px;
-  height: 14px;
-  vertical-align: middle;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-.u-switch input {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.u-switch .track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 7px;
-  background-color: #cccccc;
-}
-.u-switch .button {
-  position: absolute;
-  top: 2px;
-  bottom: 2px;
-  right: 11px;
-  left: 3px;
-  background-color: #fff;
-  border-radius: 9px;
-  transition: all 100ms ease;
-  -webkit-transition: all 100ms ease;
-}
-.u-switch.is-checked .track {
-  background-color: #5faee3;
-}
-.u-switch.is-checked .button {
-  right: 2px;
-  left: 11px;
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 14px;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
+.u-switch input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.u-switch .track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 7px;
+    background-color: #cccccc;
+}
+
+.u-switch .button {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    right: 11px;
+    left: 3px;
+    background-color: #fff;
+    border-radius: 9px;
+    transition: all 100ms ease;
+    -webkit-transition: all 100ms ease;
+}
+
+.u-switch.is-checked .track {
+    background-color: #5faee3;
+}
+
+.u-switch.is-checked .button {
+    right: 2px;
+    left: 11px;
+}
+
+
+/* End of Switch */
+
+
+/* Input Slider */
+
+.range-edit-slider {
+    width: 85%;
+    display: inline-block;
+    position: relative;
+    top: -17px;
+    margin-right: 5px;
+}
+
+.InputRange-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #3f51b5;
+    border: 1px solid #3f51b5;
+    border-radius: 100%;
+    cursor: pointer;
+    display: block;
+    height: 1.3rem;
+    margin-left: -0.5rem;
+    margin-top: -0.8rem;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    transition: -webkit-transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    width: 1.3rem;
+}
+
+.InputRange-slider:active {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.InputRange-slider:focus {
+    box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.2);
+}
+
+.InputRange.is-disabled .InputRange-slider {
+    background: #cccccc;
+    border: 1px solid #cccccc;
+    box-shadow: none;
+    -webkit-transform: none;
+    transform: none;
+}
+
+.InputRange-sliderContainer {
+    transition: left 0.3s ease-out;
+}
+
+.InputRange-label {
+    color: #aaaaaa;
+    font-family: "Helvetica Neue", san-serif;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.InputRange-label--min, .InputRange-label--max {
+    bottom: -1.4rem;
+    position: absolute;
+}
+
+.InputRange-label--min {
+    left: 0;
+}
+
+.InputRange-label--max {
+    right: 0;
+}
+
+.InputRange-label--value {
+    position: absolute;
+    top: -1.8rem;
+}
+
+.InputRange-labelContainer {
+    left: -50%;
+    position: relative;
+}
+
+.InputRange-label--max .InputRange-labelContainer {
+    left: 50%;
+}
+
+.InputRange-track {
+    background: #eeeeee;
+    border-radius: 0.3rem;
+    display: block;
+    height: 0.5rem;
+    position: relative;
+    transition: left 0.3s ease-out, width 0.3s ease-out;
+}
+
+.InputRange.is-disabled .InputRange-track {
+    background: #eeeeee;
+}
+
+.InputRange-track--container {
+    left: 0;
+    margin-top: -0.15rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.InputRange-track--active {
+    background: #3f51b5;
+}
+
+.InputRange {
+    cursor: pointer;
+    height: 1rem;
+    position: relative;
+    width: 100%;
+}
 
 .edit-action-btn .material-icons {
     padding-left: 5px;
     font-size: 14px;
 }
+
 .save-down-wrapper {
     display: inline-block;
 }
@@ -283,6 +414,7 @@ body {
 .save-down-wrapper .btn-success {
     margin-right: 20px;
 }
+
 .auto-save-btn {
     display: inline-block;
     width: 80px;
