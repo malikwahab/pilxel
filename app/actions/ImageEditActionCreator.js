@@ -15,7 +15,13 @@ import {
   TOGGLE_CONTRAST_RANGE,
   TOGGLE_SHARPNESS_RANGE,
   TOGGLE_COLOR_RANGE,
-  TOGGLE_FILTERS_SHOW
+  TOGGLE_FILTERS_SHOW,
+  TOGGLE_MAIN_IMAGE,
+  TOGGLE_CROP_IMAGE,
+  TOGGLE_CROP_BUTTON,
+  SET_CROP_STATE,
+  CLEAR_EDIT_STATE,
+  LOAD_EDIT_IMAGE
 } from '../constants';
 import { ImageAPI } from '../api/AppAPI';
 
@@ -64,7 +70,7 @@ const ImageEditActionCreator = {
   toggleAutoSave() {
     return {
       type: TOGGLE_AUTO_SAVE
-    }
+    };
   },
   save(id, editObject) {
     return (dispatch) => {
@@ -74,6 +80,12 @@ const ImageEditActionCreator = {
         (response) => dispatch({ type: IMAGE_SAVE_SUCCESS }),
         (error) => dispatch({ type: IMAGE_SAVE_FAILURE })
       );
+    };
+  },
+  cancel(id) {
+    return (dispatch) => {
+        dispatch({type: CLEAR_EDIT_STATE});
+        dispatch({type: LOAD_EDIT_IMAGE, currentImage: id});
     };
   },
   toggleRotateRange() {
@@ -116,6 +128,13 @@ const ImageEditActionCreator = {
     return (dispatch) => {
       dispatch({ type: TOGGLE_MAIN_EDIT_BUTTON });
       dispatch({ type: TOGGLE_FILTERS_SHOW });
+    }
+  },
+  toggleCropShow() {
+    return (dispatch) => {
+      dispatch({ type: TOGGLE_MAIN_IMAGE });
+      dispatch({ type: TOGGLE_CROP_IMAGE });
+      dispatch({ type: TOGGLE_MAIN_EDIT_BUTTON });
     }
   },
   convertEnhanceDegree(degree) {
@@ -203,7 +222,44 @@ const ImageEditActionCreator = {
       };
       dispatch(this.editImage(id, filterObject, autoSave));
     };
-  }
+  },
+  setCropState(cropState) {
+    return {
+      type: SET_CROP_STATE,
+      cropState
+    }
+  },
+  crop(id, cropParams, autoSave) {
+    return (dispatch) => {
+      console.log(cropParams);
+      ImageAPI.getImageDetails(id).then(
+        (response) => dispatch(this.cropImageWithDetails(id, response,
+          cropParams, autoSave)),
+        (error) => dispatch({ type: IMAGE_EDIT_FAILURE })
+      )
+    };
+  },
+  cropImageWithDetails(id, imageDetails, cropParams, autoSave) {
+    return (dispatch) => {
+      const left = (cropParams.x/100)*imageDetails.width;
+      const upper = (cropParams.y/100)*imageDetails.height;
+      const right = ((cropParams.width/100)*imageDetails.width)+left;
+      const lower = ((cropParams.height/100)*imageDetails.height)+upper;
+      const cropObject = {
+          manipulate: {
+              crop: {
+                  left,
+                  upper,
+                  right,
+                  lower
+              }
+          },
+          save: autoSave
+      };
+      dispatch(this.editImage(id, cropObject, autoSave));
+      dispatch(this.toggleCropShow());
+    };
+  },
 }
 
 export default ImageEditActionCreator;

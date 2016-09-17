@@ -16,7 +16,10 @@ import {
   TOGGLE_CONTRAST_RANGE,
   TOGGLE_COLOR_RANGE,
   TOGGLE_SHARPNESS_RANGE,
-  TOGGLE_FILTERS_SHOW
+  TOGGLE_FILTERS_SHOW,
+  TOGGLE_MAIN_IMAGE,
+  TOGGLE_CROP_IMAGE,
+  SET_CROP_STATE
 } from '../constants';
 
 const initialState = {
@@ -34,6 +37,9 @@ const initialState = {
   contrastRangeShow: false,
   filtersShow: false,
   sharpnessRangeShow: false,
+  mainImageShow: true,
+  cropImageShow: false,
+  cropObject: null,
   autoSave: false
 }
 
@@ -42,7 +48,7 @@ export const imageEdit = (state = initialState, action) => {
   case IMAGE_EDIT_REQUEST:
     return Object.assign({}, state, { editingImage: true });
   case CLEAR_EDIT_STATE:
-    return Object.assign({}, state, initialState)
+    return Object.assign({}, state, initialState);
   case LOAD_EDIT_IMAGE:
     return Object.assign({}, state, {editImageSrc: `/api/v1/images/${action.currentImage}/`, currentEditImage: action.currentImage})
   case IMAGE_MIRROR_SUCCESS:
@@ -75,6 +81,12 @@ export const imageEdit = (state = initialState, action) => {
     return Object.assign({}, state, {sharpnessRangeShow: !state.sharpnessRangeShow});
   case TOGGLE_FILTERS_SHOW:
     return Object.assign({}, state, {filtersShow: !state.filtersShow});
+  case TOGGLE_MAIN_IMAGE:
+    return Object.assign({}, state, {mainImageShow: !state.mainImageShow});
+  case TOGGLE_CROP_IMAGE:
+    return Object.assign({}, state, {cropImageShow: !state.cropImageShow});
+  case SET_CROP_STATE:
+    return Object.assign({}, state, {cropObject: action.cropState});
   default:
     return state;
   }

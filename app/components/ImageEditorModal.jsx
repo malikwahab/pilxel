@@ -8,6 +8,8 @@ import EditActionButtons from './EditActionButtons';
 import RangeEditButton from './RangeEditButton';
 import AdjustButtons from './AdjustButtons';
 import Filters from './Filters';
+import CropContainer from './CropContainer';
+import CropButton from './CropButton';
 
 class ImageEditorModal extends Component {
     render(){
@@ -19,7 +21,8 @@ class ImageEditorModal extends Component {
               <Modal.Body>
               <EditActionButtons />
                 <div className="img-edit-container">
-                  <img src={this.props.imageSrc} alt="Image Editor" />
+                  {this.props.mainImageShow ? <img src={this.props.imageSrc} alt="Image Editor" /> : null }
+                  {this.props.cropImageShow ? <CropContainer imageSrc={this.props.imageSrc} /> : null}
                 </div>
                 {this.props.mainEditbtnShow ? <EditButtons /> : null}
                 {this.props.rotateRangeShow ? <RangeEditButton onChangeComplete={this.props.rotateRangeOnChangeComplete} close={this.props.closeRotateRange} min={0} max={360} defaultValue={0}/> : null}
@@ -29,6 +32,7 @@ class ImageEditorModal extends Component {
                 {this.props.colorRangeShow ? <RangeEditButton onChangeComplete={this.props.colorRangeOnChangeComplete} close={this.props.closeColorRange} min={-10} max={10} defaultValue={0} /> : null}
                 {this.props.adjustButtonsShow ? <AdjustButtons /> : null }
                 {this.props.filtersShow ? <Filters /> : null }
+                {this.props.cropImageShow ? <CropButton /> : null}
               </Modal.Body>
             </Modal>
         )
@@ -63,7 +67,9 @@ const mapStateToProps = (state) => {
         contrastRangeShow: state.imageEdit.contrastRangeShow,
         sharpnessRangeShow: state.imageEdit.sharpnessRangeShow,
         colorRangeShow: state.imageEdit.colorRangeShow,
-        filtersShow: state.imageEdit.filtersShow
+        filtersShow: state.imageEdit.filtersShow,
+        cropImageShow: state.imageEdit.cropImageShow,
+        mainImageShow: state.imageEdit.mainImageShow
     }
 }
 
