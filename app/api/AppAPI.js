@@ -78,12 +78,15 @@ export const ImageAPI = {
     return fetch(`/api/v1/images/${id}/`, config)
       .then(checkStatus)
       .then(responseToBlob)
-      .then(loadObjectURL)
+      .then(loadObjectURL);
   },
-  uploadImage(name, file) {
-    var data = new FormData()
-    data.append('image', file)
-    data.append('name', name)
+  uploadImage(name, file, folder) {
+    var data = new FormData();
+    data.append('image', file);
+    data.append('name', name);
+    if(folder) {
+      data.append('folder', folder);
+    }
     let config = {
       method: "post",
       headers: {
@@ -93,7 +96,21 @@ export const ImageAPI = {
     };
     return fetch('/api/v1/images/', config)
       .then(checkStatus)
-      .then(parseJSON)
+      .then(parseJSON);
+  },
+  fetchImages() {
+    let config = {
+      method: "get",
+      headers: authHeader
+    };
+    return fetch('/api/v1/images/', config).then(checkStatus).then(parseJSON);
+  },
+  fetchFolders() {
+    let config = {
+      method: "get",
+      headers: authHeader
+    };
+    return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
   },
 }
 export default AuthenticateAPI;

@@ -12,7 +12,7 @@ class UploadModal extends Component {
       file: null,
       preview: "",
       name: "",
-      folder: "",
+      folder: 0,
       disbaleUpload: true,
       showValidation: false
     };
@@ -27,16 +27,17 @@ class UploadModal extends Component {
   }
   onUpload(){
     if(this.state.name !== "" && this.state.file !== null){
-      this.props.upload(this.state.name, this.state.file);
+     this.props.upload(this.state.name, this.state.file, this.state.folder);
     }
     else {
       this.setState({
         showValidation: true
       });
     }
-  }
-  onSelectFolder(event){
-    console.log(event.target.value);
+    this.setState({
+      name: "",
+      folder: 0
+    })
   }
   handleFieldChange(event) {
      event.preventDefault();
@@ -62,10 +63,12 @@ class UploadModal extends Component {
             </FormGroup>
             <FormGroup >
               <ControlLabel>Folder</ControlLabel>
-              <FormControl componentClass="select" placeholder="select" onChange={this.handleFieldChange.bind(this)} name="folder">
-                <option value="Root">Root Folder</option>
-                <option value="other">Adventure</option>
-              </FormControl>
+              <select placeholder="select" onChange={this.handleFieldChange.bind(this)} className="form-control" name="folder">
+                <option value={0}>Root Folder</option>
+                {this.props.folders.map((folder, i) => {
+                  return(<option value={folder.id} key={i}>{folder.name}</option>)
+                })}
+              </select>
             </FormGroup>
             <Dropzone multiple={false} maxSize={3000000} onDrop={this.onDrop.bind(this)}>
               <div className="drop-zone">Drop an Image here, or click to select files to upload. File Upload should not be more than 3MB</div>
@@ -85,20 +88,22 @@ UploadModal.proptypes = {
   upload: PropTypes.func,
   closeUploadModal: PropTypes.func,
   uploadModalShow: PropTypes.bool,
-  showPreview: PropTypes.bool
+  showPreview: PropTypes.bool,
+  folders: PropTypes.object
 }
 
 const mapStateToProps = (state) => {
   return {
     uploadModalShow: state.modalShow.uploadModalShow,
-    showPreview: state.imageUpload.showPreview
+    showPreview: state.imageUpload.showPreview,
+    folders: state.data.folders
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     closeUploadModal: () => dispatch(ImageUploadActionCreator.toggleUploadModal()),
-    upload: (name, file) => dispatch(ImageUploadActionCreator.uploadImage(name, file))
+    upload: (name, file, folder) => dispatch(ImageUploadActionCreator.uploadImage(name, file, folder))
   }
 }
 

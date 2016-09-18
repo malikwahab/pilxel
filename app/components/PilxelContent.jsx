@@ -4,35 +4,60 @@ import ImageContainer from './ImageContainer';
 import ImageInfoModal from './ImageInfoModal';
 import ImageEditorModal from './ImageEditorModal';
 import UploadModal from './UploadModal';
+import Folder from './Folder';
 import ImageUploadActionCreator from '../actions/ImageUploadActionCreator';
+import DataActionCreator from '../actions/DataActionCreator';
 import { connect } from 'react-redux';
 
 class PilxelContent extends Component {
+  componentDidMount(){
+    this.props.fetchImages();
+    this.props.fetchFolders();
+  }
   render() {
     return (
       <Grid fluid className="page-content-wrapper">
         <Row className="show-grid">
-          <ImageContainer id="1"/>
-          <ImageContainer id="2"/>
-          <ImageContainer id="3"/>
-          <ImageContainer id="4"/>
+          {this.props.isRootFolder ? this.props.folders.map((folder, i) => {
+              return(<Folder key={i} name={folder.name} open={this.props.showFolder.bind(null, folder.id)}/>)
+          }) : null }
+          {this.props.images.map((image, i) => {
+              if(image.folder == this.props.displayedImageFolder){
+                return(<ImageContainer key={i} id={image.id}/>)
+              }
+          })}
         </Row>
         <ImageInfoModal />
         <ImageEditorModal />
         <UploadModal />
-        <a className="add-image" ><i className="material-icons" onClick={this.props.showUploadModal}>add_a_photo</i></a>
+        <a className="add-image" onClick={this.props.showUploadModal}><i className="material-icons">add_a_photo</i></a>
       </Grid>
     )
   }
 }
 
 PilxelContent.proptypes = {
-  showUploadModal: PropTypes.func
+  displayedImageFolder: PropTypes.number,
+  isRootFolder: PropTypes.bool,
+  showUploadModal: PropTypes.func,
+  fetchImages: PropTypes.func,
+  fetchFolders: PropTypes.func,
+}
+const mapStateToProps = (state) => {
+  return {
+    images: state.data.images,
+    folders: state.data.folders,
+    displayedImageFolder: state.data.displayedImageFolder,
+    isRootFolder: state.data.isRootFolder
+  }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    showUploadModal: () => dispatch(ImageUploadActionCreator.toggleUploadModal())
+    showUploadModal: () => dispatch(ImageUploadActionCreator.toggleUploadModal()),
+    fetchImages: () => dispatch(DataActionCreator.fetchImages()),
+    fetchFolders: () => dispatch(DataActionCreator.fetchFolders()),
+    showFolder: (id) => dispatch(DataActionCreator.showFolder(id))
   }
 }
 
-export default connect(null, mapDispatchToProps)(PilxelContent);
+export default connect(mapStateToProps, mapDispatchToProps)(PilxelContent);
