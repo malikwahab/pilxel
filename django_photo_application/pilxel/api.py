@@ -5,7 +5,7 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from rest_framework import filters, permissions, status, viewsets, mixins
+from rest_framework import filters, mixins, permissions, status, viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
 
@@ -15,10 +15,10 @@ from image_transformation.enhancement import Enhancement
 from image_transformation.filters import FilterImage
 from image_transformation.manipulate import ManipulateImage
 from PIL import Image
-from pilxel.filters import IsImageOwnerFilter, IsFolderOwnerFilter
-from pilxel.models import ImageModel, FolderModel
-from pilxel.permissions import IsOwner, IsImageOwner
-from pilxel.serializers import ImageSerializer, FolderSerializer
+from pilxel.filters import IsFolderOwnerFilter, IsImageOwnerFilter
+from pilxel.models import FolderModel, ImageModel
+from pilxel.permissions import IsImageOwner, IsOwner
+from pilxel.serializers import FolderSerializer, ImageSerializer
 from rest_auth.registration.views import SocialLoginView
 
 
@@ -89,9 +89,10 @@ class ImageViewSet(viewsets.ModelViewSet):
         return response
 
 
-class ImageDetailsViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class ImageDetailsViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
 
     queryset = ImageModel.objects.all()
+    serializer_class = ImageSerializer
     permission_classes = (permissions.IsAuthenticated, IsImageOwner)
 
     def retrieve(self, request, pk):

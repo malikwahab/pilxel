@@ -5,7 +5,7 @@ from pilxel.models import ImageModel, FolderModel
 class ImageSerializer(serializers.ModelSerializer):
 
     owner = serializers.ReadOnlyField(source='owner.username')
-    image = serializers.ImageField(write_only=True)
+    image = serializers.ImageField(write_only=True, required=False)
     url = serializers.HyperlinkedIdentityField(view_name='image-detail',
                                                format='html')
 
