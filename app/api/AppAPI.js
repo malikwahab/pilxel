@@ -39,8 +39,7 @@ let AuthenticateAPI = {
     }
     return fetch('/api/v1/auth/login/', config)
       .then(checkStatus)
-      .then(parseJSON)
-      .then((data) => localStorage.setItem('token', data.token));
+      .then(parseJSON);
   },
 
   signUpUser(credentials) {
@@ -54,8 +53,7 @@ let AuthenticateAPI = {
     }
     return fetch('/api/v1/auth/register/', config)
       .then(checkStatus)
-      .then(parseJSON)
-      .then((data) => localStorage.setItem('token', data.token));
+      .then(parseJSON);
   },
 };
 

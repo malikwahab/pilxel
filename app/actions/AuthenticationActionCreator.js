@@ -7,7 +7,10 @@ const AuthenticationActionCreator = {
       return (dispatch) => {
           dispatch({ type: AUTHENTICATE_REQUEST });
           AuthenticateAPI.loginUser(credentials).then(
-              (response) => dispatch({ type: AUTHENTICATE_SUCCESS }),
+              (response) => {
+                  localStorage.setItem('token', response.token);
+                  dispatch({ type: AUTHENTICATE_SUCCESS })
+              },
               (error) => dispatch({ type: AUTHENTICATE_FAILURE })
           )
       }
@@ -16,7 +19,9 @@ const AuthenticationActionCreator = {
       return (dispatch) => {
           dispatch({ type: AUTHENTICATE_REQUEST });
           AuthenticateAPI.signUpUser(credentials).then(
-              (response) => dispatch({ type: AUTHENTICATE_SUCCESS }),
+              (response) => {
+                login(credentials);
+              },
               (error) => dispatch({ type: AUTHENTICATE_FAILURE })
           )
       }
