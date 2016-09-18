@@ -1,4 +1,4 @@
-import { AUTHENTICATE_SUCCESS,AUTHENTICATE_FAILURE, AUTHENTICATE_REQUEST } from '../constants';
+import { AUTHENTICATE_SUCCESS,AUTHENTICATE_FAILURE, AUTHENTICATE_REQUEST, LOGOUT } from '../constants';
 import AuthenticateAPI from '../api/AppAPI';
 
 const AuthenticationActionCreator = {
@@ -20,6 +20,12 @@ const AuthenticationActionCreator = {
               (error) => dispatch({ type: AUTHENTICATE_FAILURE })
           )
       }
+  },
+  logout(){
+    localStorage.removeItem('token');
+    return {
+      type: LOGOUT
+    }
   }
 }
 

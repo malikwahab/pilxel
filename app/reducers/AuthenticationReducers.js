@@ -1,4 +1,4 @@
-import { AUTHENTICATE_SUCCESS,AUTHENTICATE_FAILURE, AUTHENTICATE_REQUEST } from '../constants';
+import { AUTHENTICATE_SUCCESS,AUTHENTICATE_FAILURE, AUTHENTICATE_REQUEST, LOGOUT } from '../constants';
 
 const initialState = {
     isFetching: false,
@@ -13,6 +13,8 @@ export const authenticate = (state = initialState, action) => {
           return Object.assign({}, state, {isFetching: false, isAuthenticated: true, token: action.token});
         case AUTHENTICATE_FAILURE:
           return Object.assign({}, state, {isFetching:false, isAuthenticated: false, error: true});
+        case LOGOUT:
+          return Object.assign({}, state, {isAuthenticated: false});
         default:
           return state
     }
