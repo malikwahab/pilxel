@@ -80,5 +80,20 @@ export const ImageAPI = {
       .then(responseToBlob)
       .then(loadObjectURL)
   },
+  uploadImage(name, file) {
+    var data = new FormData()
+    data.append('image', file)
+    data.append('name', name)
+    let config = {
+      method: "post",
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token')
+      },
+      body: data
+    };
+    return fetch('/api/v1/images/', config)
+      .then(checkStatus)
+      .then(parseJSON)
+  },
 }
 export default AuthenticateAPI;

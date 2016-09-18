@@ -20,10 +20,6 @@ class EditButtons extends Component {
         title: "Mirror",
         edit: this.props.mirror.bind(this, this.props.currentEditImage, !this.props.currentMirrorState, this.props.autoSave)
       }, {
-        icon: "photo_size_select_large",
-        title: "Resize",
-        edit: this.props.mirror
-      }, {
         icon: "rotate_right",
         title: "Rotate",
         edit: this.props.showRotateRange
