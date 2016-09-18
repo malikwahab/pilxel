@@ -3,6 +3,7 @@ import {Modal, Glyphicon, Col, Row, Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import InfoModalActionCreator from '../actions/InfoModalActionCreator';
 import EditModalActionCreator from '../actions/EditModalActionCreator';
+import DataActionCreator from '../actions/DataActionCreator';
 
 class ImageInfoModal extends Component {
 
@@ -10,6 +11,9 @@ class ImageInfoModal extends Component {
     if (nextProps.currentImage != this.props.currentImage) {
       this.props.fetchImageDetails(nextProps.currentImage);
     }
+  }
+  deleteImage(){
+
   }
   render() {
     return (
@@ -44,7 +48,7 @@ class ImageInfoModal extends Component {
           <Row className="image-info-btn">
             <Button className="image-info-edit-btn" onClick={this.props.openEditModal.bind(null, this.props.currentImage)}>Edit</Button>
             <Button bsStyle="primary">Share On Facebook</Button>
-            <Button bsStyle="danger">Delete</Button>
+            <Button bsStyle="danger" onClick={(event) => {this.props.deleteImage(this.props.currentImage); this.props.closeInfoModal()}}>Delete</Button>
           </Row>
         </Modal.Body>
       </Modal>
@@ -57,6 +61,7 @@ ImageInfoModal.proptypes = {
   currentImage: PropTypes.string,
   closeInfoModal: PropTypes.func,
   openEditModal: PropTypes.func,
+  deleteImage: PropTypes.func,
   details: PropTypes.object
 }
 
@@ -68,7 +73,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeInfoModal: () => dispatch(InfoModalActionCreator.closeModal()),
     openEditModal: (id) => dispatch(EditModalActionCreator.showModal(id)),
-    fetchImageDetails: (image_id) => dispatch(InfoModalActionCreator.fetchImageDetails(image_id))
+    fetchImageDetails: (image_id) => dispatch(InfoModalActionCreator.fetchImageDetails(image_id)),
+    deleteImage: (id) => dispatch(DataActionCreator.deleteImage(id))
   }
 }
 

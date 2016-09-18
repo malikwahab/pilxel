@@ -19,7 +19,7 @@ import {
   TOGGLE_FILTERS_SHOW,
   TOGGLE_MAIN_IMAGE,
   TOGGLE_CROP_IMAGE,
-  SET_CROP_STATE
+  SET_CROP_STATE,
 } from '../constants';
 
 const initialState = {
@@ -62,7 +62,7 @@ export const imageEdit = (state = initialState, action) => {
   case SAVE_EDIT_STATE:
     return Object.assign({}, state, { editObject: action.editObject});
   case IMAGE_SAVE_SUCCESS:
-    return Object.assign({}, state, { editObject: null});
+    return Object.assign({}, state, { editObject: null, editingImage: false});
   case TOGGLE_MAIN_EDIT_BUTTON:
     return Object.assign({}, state, {mainEditbtnShow: !state.mainEditbtnShow});
   case TOGGLE_ROTATE_RANGE:

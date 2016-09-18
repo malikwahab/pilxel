@@ -9,6 +9,8 @@ import {
   SHOW_FOLDER,
   SHOW_ROOT_FOLDER,
   FOLDER_ADD_SUCCESS,
+  IMAGE_DELETE_SUCCESS,
+  IMAGE_DELETE_FAILURE
 } from '../constants';
 
 const DataActionCreator = {
@@ -41,6 +43,22 @@ const DataActionCreator = {
       ImageAPI.addFolder(name).then(
         (response) => dispatch({ type: FOLDER_ADD_SUCCESS, newFolder: response }),
         (error) => dispatch({ type: FOLDER_ADD_FAILURE })
+      );
+    };
+  },
+  deleteImage(id) {
+    return (dispatch) => {
+      ImageAPI.deleteImage(id).then(
+        (response) => dispatch({ type: IMAGE_DELETE_SUCCESS, id: id}),
+        (error) => dispatch({ type: IMAGE_DELETE_FAILURE })
+      );
+    };
+  },
+  updateFolder(id, name) {
+    return (dispatch) => {
+      ImageAPI.updateFolder(id, name).then(
+        (response) => dispatch({ type: FOLDER_UPDATE_SUCESS, folder: response}),
+        (error) => dispatch({type: FOLDER_UPDATE_FAILURE })
       );
     };
   }

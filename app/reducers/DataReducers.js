@@ -9,7 +9,11 @@ import {
   SHOW_FOLDER,
   IMAGE_UPLOAD_SUCCESS,
   FOLDER_ADD_SUCCESS,
-  FOLDER_ADD_FAILURE
+  FOLDER_ADD_FAILURE,
+  IMAGE_DELETE_SUCCESS,
+  IMAGE_DELETE_FAILURE,
+  FOLDER_UPDATE_SUCESS,
+  FOLDER_UPDATE_FAILURE
 } from '../constants';
 
 const initialState = {
@@ -18,6 +22,7 @@ const initialState = {
   displayedImageFolder: null,
   isRootFolder: true
 };
+
 
 const data = (state = initialState, action) => {
   switch (action.type) {
@@ -31,9 +36,18 @@ const data = (state = initialState, action) => {
       return update(state, {images: {$push: [action.newImage]}});
     case FOLDER_ADD_SUCCESS:
       return update(state, {folders: {$push: [action.newFolder]}});
+    case IMAGE_DELETE_SUCCESS:
+      const imageIndex = getImageIndex(state, action.id);
+      return update(state, {images: {$splice: [[imageIndex, 1]]}});
+    case FOLDER_UPDATE_SUCESS:
+      const folderIndex = getFolderIndex(state, action.folder.id);
+      return update(state, {folders: { [folderIndex] : {$set: action.folder}}});
     default:
       return state;
   }
 };
 
 export default data;
+
+export const getImageIndex = (state, id) => state.images.findIndex((image)=>image.id == id);
+export const getFolderIndex = (state, id) => state.images.findIndex((folder)=>folder.id == id);

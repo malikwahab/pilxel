@@ -118,6 +118,20 @@ export const ImageAPI = {
     };
     return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
   },
+  deleteImage(id) {
+    let config = {
+      method: "delete",
+      headers: authHeader
+    };
+    return fetch(`/api/v1/images/${id}/`, config).then(checkStatus);
+  },
+  updateFolder(id, name) {
+    let config = {
+      method: "put",
+      headers: authHeader
+    };
+    return fetch(`/api/v1/images/${id}/`, config).then(checkStatus).then(parseJSON);
+  }
 }
 
 export default AuthenticateAPI;

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Grid, Row, Col, Glyphicon } from 'react-bootstrap';
 import InfoModalActionCreator from '../actions/InfoModalActionCreator';
 import EditModalActionCreator from '../actions/EditModalActionCreator';
+import DataActionCreator from '../actions/DataActionCreator';
 import { connect } from 'react-redux';
 
 
@@ -16,7 +17,7 @@ class ImageContainer extends Component {
                     <div className="img-btn">
                         <Glyphicon glyph="edit" onClick={this.props.openEditModal.bind(null, this.props.id)}/>
                         <Glyphicon glyph="share-alt" />
-                        <Glyphicon glyph="trash" />
+                        <Glyphicon glyph="trash" onClick={this.props.deleteImage.bind(null, this.props.id)}/>
                     </div>
                 </div>
             </Col>
@@ -26,13 +27,15 @@ class ImageContainer extends Component {
 
 ImageContainer.proptypes = {
     id: PropTypes.string,
-    openInfoModal: PropTypes.func
+    openInfoModal: PropTypes.func,
+    deleteImage: PropTypes.func,
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         openInfoModal: (id) => dispatch(InfoModalActionCreator.showModal(id)),
-        openEditModal: (id) => dispatch(EditModalActionCreator.showModal(id))
+        openEditModal: (id) => dispatch(EditModalActionCreator.showModal(id)),
+        deleteImage: (id) => dispatch(DataActionCreator.deleteImage(id)),
     }
 }
 

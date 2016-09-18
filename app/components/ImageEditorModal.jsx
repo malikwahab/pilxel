@@ -22,6 +22,7 @@ class ImageEditorModal extends Component {
               <EditActionButtons />
                 <div className="img-edit-container">
                   {this.props.mainImageShow ? <img src={this.props.imageSrc} alt="Image Editor" /> : null }
+                  {this.props.editingImage ? <div className="is-editing" ><img src="/static/img/loading.gif" /></div> : null }
                   {this.props.cropImageShow ? <CropContainer imageSrc={this.props.imageSrc} /> : null}
                 </div>
                 {this.props.mainEditbtnShow ? <EditButtons /> : null}
@@ -41,7 +42,6 @@ class ImageEditorModal extends Component {
 
 ImageEditorModal.proptypes = {
     editModalShow: PropTypes.bool,
-    closeEditModal: PropTypes.func,
     imageSrc: PropTypes.string,
     mainEditbtnShow: PropTypes.bool,
     rotateRangeShow: PropTypes.bool,
@@ -51,6 +51,8 @@ ImageEditorModal.proptypes = {
     sharpnessRangeShow: PropTypes.bool,
     colorRangeShow: PropTypes.bool,
     filtersShow: PropTypes.bool,
+    editingImage: PropTypes.bool,
+    closeEditModal: PropTypes.func,
     closeBrightnessRange: PropTypes.func,
     closeRotateRange: PropTypes.func,
     rotateRangeOnChangeComplete: PropTypes.func
@@ -69,7 +71,8 @@ const mapStateToProps = (state) => {
         colorRangeShow: state.imageEdit.colorRangeShow,
         filtersShow: state.imageEdit.filtersShow,
         cropImageShow: state.imageEdit.cropImageShow,
-        mainImageShow: state.imageEdit.mainImageShow
+        mainImageShow: state.imageEdit.mainImageShow,
+        editingImage: state.imageEdit.editingImage
     }
 }
 
