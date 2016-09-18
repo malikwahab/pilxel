@@ -2,8 +2,38 @@ import React, {Component, PropTypes} from 'react';
 import {Glyphicon} from 'react-bootstrap';
 import DataActionCreator from '../actions/DataActionCreator';
 import {connect} from 'react-redux';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+
 
 class SideBar extends Component {
+
+  constructor(){
+    super();
+    this.state ={
+      name: "",
+      showAddFolder: false
+    };
+  }
+
+  handleFieldChange(event) {
+     event.preventDefault();
+     const key = event.target.name;
+     const value = event.target.value;
+     this.setState({
+       [key]: value,
+     });
+   }
+
+  toggleShowAddFolder() {
+    this.setState({
+      showAddFolder: !this.state.showAddFolder
+    })
+  }
+
+  addFolder() {
+    this.props.addFolder(this.state.name);
+    this.toggleShowAddFolder();
+  }
 
   render() {
     return (
@@ -28,9 +58,20 @@ class SideBar extends Component {
                   </a>
                 </li>
               )
-            })}
+            })
+          }
+          <li >
+          {this.state.showAddFolder ?
+            <FormGroup className="new-folder-input">
+              <FormControl type="text" name="name" value={this.state.name} onChange={this.handleFieldChange.bind(this)} placeholder="New Name"/>
+              <span>
+                <Button bsSize="xsmall" bsStyle="success" onClick={this.addFolder.bind(this)}>Add</Button>
+                <Button bsSize="xsmall" onClick={this.toggleShowAddFolder.bind(this)}>Cancel</Button>
+              </span>
+            </FormGroup> : null }
+          </li>
           <li>
-            <a href="#">
+            <a href="#" onClick={this.toggleShowAddFolder.bind(this)}>
               <span className="link-text">Add New</span>
               <i className="material-icons">create_new_folder</i>
             </a>
@@ -53,7 +94,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    showFolder: (id) => dispatch(DataActionCreator.showFolder(id))
+    showFolder: (id) => dispatch(DataActionCreator.showFolder(id)),
+    addFolder: (name) => dispatch(DataActionCreator.addFolder(name))
   }
 }
 

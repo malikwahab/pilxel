@@ -112,5 +112,14 @@ export const ImageAPI = {
     };
     return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
   },
+  addFolder(name) {
+    let config = {
+      method: "post",
+      headers: authHeader,
+      body: JSON.stringify({name: name})
+    };
+    return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
+  },
 }
+
 export default AuthenticateAPI;

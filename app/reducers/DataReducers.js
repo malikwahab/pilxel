@@ -7,7 +7,9 @@ import {
   FOLDER_FETCH_SUCCESS,
   FOLDER_FETCH_FAILURE,
   SHOW_FOLDER,
-  IMAGE_UPLOAD_SUCCESS
+  IMAGE_UPLOAD_SUCCESS,
+  FOLDER_ADD_SUCCESS,
+  FOLDER_ADD_FAILURE
 } from '../constants';
 
 const initialState = {
@@ -27,6 +29,8 @@ const data = (state = initialState, action) => {
       return update(state, {$merge: {displayedImageFolder: action.id, isRootFolder: !action.id}});
     case IMAGE_UPLOAD_SUCCESS:
       return update(state, {images: {$push: [action.newImage]}});
+    case FOLDER_ADD_SUCCESS:
+      return update(state, {folders: {$push: [action.newFolder]}});
     default:
       return state;
   }

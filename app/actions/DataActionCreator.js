@@ -8,6 +8,7 @@ import {
   FOLDER_FETCH_FAILURE,
   SHOW_FOLDER,
   SHOW_ROOT_FOLDER,
+  FOLDER_ADD_SUCCESS,
 } from '../constants';
 
 const DataActionCreator = {
@@ -34,6 +35,14 @@ const DataActionCreator = {
       type: SHOW_FOLDER,
       id
     }
+  },
+  addFolder(name) {
+    return (dispatch) => {
+      ImageAPI.addFolder(name).then(
+        (response) => dispatch({ type: FOLDER_ADD_SUCCESS, newFolder: response }),
+        (error) => dispatch({ type: FOLDER_ADD_FAILURE })
+      );
+    };
   }
 };
 
