@@ -26,7 +26,7 @@ body {
 .logo {
     display: block;
     color: #fff;
-    background: url('../img/logo.png') no-repeat fixed;
+    background: url('../img/Logo.png') no-repeat fixed;
     background-position: center 30%;
     width: 500px;
     height: 60%;

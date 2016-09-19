@@ -6,3 +6,4 @@ venv
 django_photo_application/.coverage
 django_photo_application/staticfiles/
 django_photo_application/media/
+django_photo_application/django_photo_application/settings/development.py

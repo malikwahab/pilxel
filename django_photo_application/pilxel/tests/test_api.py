@@ -252,9 +252,7 @@ class TestImageDetailsAPI(BaseTestCase):
         create_response = self.create_image()
         image_id = create_response.data.get("id")
         post_response = self.client.post(self.url + "{}/".format(image_id), {})
-        put_response = self.client.put(self.url + "{}/".format(image_id), {})
         self.assertEquals(post_response.status_code,
-                          put_response.status_code,
                           status.HTTP_405_METHOD_NOT_ALLOWED)
 
 

@@ -1,0 +1,1 @@
+web: source ./build.sh;

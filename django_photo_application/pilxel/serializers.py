@@ -9,6 +9,11 @@ class ImageSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='image-detail',
                                                format='html')
 
+    def create(self, validated_data):
+        if not validated_data.get("name") or not validated_data.get("image"):
+            raise serializers.ValidationError("Name cannot be empty")
+        return super(ImageSerializer, self).create(validated_data)
+
     class Meta:
         model = ImageModel
         fields = ('id', 'url', 'name', 'date_modified', 'date_created',
@@ -21,6 +26,11 @@ class FolderSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
     url = serializers.HyperlinkedIdentityField(view_name='folder-detail',
                                                format='html')
+
+    def create(self, validated_data):
+        if not validated_data.get("name"):
+            raise serializers.ValidationError("Name cannot be empty")
+        return super(FolderSerializer, self).create(validated_data)
 
     class Meta:
         model = FolderModel

@@ -9,6 +9,10 @@ install:
 
 
 # command to run tests
-script: python manage.py test
+script:
+    - cd django_photo_application/
+    - python manage.py collectstatic --noinput --settings=django_photo_application.settings.test
+    - python manage.py test --settings=django_photo_application.settings.test
+
 after_success:
   - coveralls
