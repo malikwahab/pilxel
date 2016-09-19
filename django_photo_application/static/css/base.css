@@ -86,6 +86,9 @@ body {
 .sidebar-nav .link-text {
     display: inline-block;
     width: 120px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sidebar-nav li {
@@ -147,6 +150,13 @@ body {
     width: 800px;
 }
 
+.edit-img-details {
+    padding-left: 10px;
+}
+
+.edit-img-details .btn {
+    margin-right: 10px;
+}
 .img-info ul {
     list-style: none;
     border-left: 1px solid #999;

@@ -78,7 +78,7 @@ TEMPLATES = [
 
 # for django_rest_auth
 REST_USE_JWT = True
-SITE_ID = 2
+SITE_ID = 3
 # additional settings django_rest_auth
 REST_SESSION_LOGIN = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

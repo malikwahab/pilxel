@@ -2,7 +2,8 @@ import { AUTHENTICATE_SUCCESS,AUTHENTICATE_FAILURE, AUTHENTICATE_REQUEST, LOGOUT
 
 const initialState = {
     isFetching: false,
-    isAuthenticated: localStorage.getItem('token') ? true : false
+    isAuthenticated: localStorage.getItem('token') ? true : false,
+    username: ''
 }
 
 export const authenticate = (state = initialState, action) => {
@@ -10,7 +11,7 @@ export const authenticate = (state = initialState, action) => {
         case AUTHENTICATE_REQUEST:
           return Object.assign({}, state, {isFetching: true, isAuthenticated: false});
         case AUTHENTICATE_SUCCESS:
-          return Object.assign({}, state, {isFetching: false, isAuthenticated: true, token: action.token});
+          return Object.assign({}, state, {isFetching: false, isAuthenticated: true, username: action.username});
         case AUTHENTICATE_FAILURE:
           return Object.assign({}, state, {isFetching:false, isAuthenticated: false, error: true});
         case LOGOUT:

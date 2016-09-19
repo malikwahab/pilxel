@@ -13,7 +13,9 @@ import {
   IMAGE_DELETE_SUCCESS,
   IMAGE_DELETE_FAILURE,
   FOLDER_UPDATE_SUCESS,
-  FOLDER_UPDATE_FAILURE
+  FOLDER_UPDATE_FAILURE,
+  IMAGE_DETAILS_UPDATE_FAILURE,
+  IMAGE_DETAILS_UPDATE_SUCCESS
 } from '../constants';
 
 const initialState = {
@@ -37,11 +39,14 @@ const data = (state = initialState, action) => {
     case FOLDER_ADD_SUCCESS:
       return update(state, {folders: {$push: [action.newFolder]}});
     case IMAGE_DELETE_SUCCESS:
-      const imageIndex = getImageIndex(state, action.id);
+      let imageIndex = getImageIndex(state, action.id);
       return update(state, {images: {$splice: [[imageIndex, 1]]}});
     case FOLDER_UPDATE_SUCESS:
-      const folderIndex = getFolderIndex(state, action.folder.id);
+      let folderIndex = getFolderIndex(state, action.folder.id);
       return update(state, {folders: { [folderIndex] : {$set: action.folder}}});
+    case IMAGE_DETAILS_UPDATE_SUCCESS:
+      imageIndex = getImageIndex(state, action.image.id);
+      return update(state, {images: { [imageIndex] : {$set: action.image}}});
     default:
       return state;
   }

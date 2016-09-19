@@ -1,6 +1,7 @@
 import React, {Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { LandingActionCreator } from '../actions/LandingActions';
+import AuthenticationActionCreator from '../actions/AuthenticationActionCreator';
 import { Row } from 'react-bootstrap';
 
 
@@ -15,7 +16,7 @@ class LandingButton extends Component {
               <a className="pilxel-button btn" onClick={this.props.signUpShow}>
                 Sign Up
               </a>
-              <a className="pilxel-button btn">
+              <a className="pilxel-button btn" onClick={this.props.loginWithFacebook}>
                 Login with Facebook
               </a>
             </div>
@@ -25,13 +26,16 @@ class LandingButton extends Component {
 
 
 LandingButton.propTypes = {
-    showLogin: PropTypes.func
+    showLogin: PropTypes.func,
+    signUpShow: PropTypes.func,
+    loginWithFacebook: PropTypes.func
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         showLogin: () => dispatch(LandingActionCreator.toggleLogin()),
-        signUpShow: () => dispatch(LandingActionCreator.toggleSignUp())
+        signUpShow: () => dispatch(LandingActionCreator.toggleSignUp()),
+        loginWithFacebook: () => dispatch(AuthenticationActionCreator.loginWithFacebook())
     };
 }
 

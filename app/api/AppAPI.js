@@ -1,5 +1,24 @@
 import 'whatwg-fetch';
 
+window.fbAsyncInit = function () {
+  FB.init({
+    appId: 1115277871867265,
+    xfbml: true,
+    version: 'v2.4'
+  });
+};
+
+(function (d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {
+    return; }
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -82,7 +101,7 @@ export const ImageAPI = {
     var data = new FormData();
     data.append('image', file);
     data.append('name', name);
-    if(folder) {
+    if (folder) {
       data.append('folder', folder);
     }
     let config = {
@@ -114,7 +133,7 @@ export const ImageAPI = {
     let config = {
       method: "post",
       headers: authHeader,
-      body: JSON.stringify({name: name})
+      body: JSON.stringify({ name: name })
     };
     return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
   },
@@ -128,10 +147,73 @@ export const ImageAPI = {
   updateFolder(id, name) {
     let config = {
       method: "put",
-      headers: authHeader
+      headers: authHeader,
+      body: JSON.stringify({ name: name })
     };
-    return fetch(`/api/v1/images/${id}/`, config).then(checkStatus).then(parseJSON);
+    return fetch(`/api/v1/folder/${id}/`, config).then(checkStatus).then(
+      parseJSON);
+  },
+  updateImage(id, updateObject) {
+    let config = {
+      method: "put",
+      headers: authHeader,
+      body: JSON.stringify(updateObject)
+    };
+    return fetch(`/api/v1/image-details/${id}/`, config).then(checkStatus)
+    .then(parseJSON);
   }
+}
+
+export let facebookAPI = {
+  shareImage(id, imageDetails){
+      FB.ui({
+        method: 'share_open_graph',
+        action_type: 'og.shares',
+        action_properties: JSON.stringify({
+            object : {
+               'og:url': "http://buppli.herokuapp.com",
+               'og:title': imageDetails.name,
+               'og:og:image:width': imageDetails.width,
+               'og:image:height': imageDetails.height,
+               'og:image': "http://buppli.herokuapp.com/static/images/background.jpg"
+            }
+        })
+    });
+  },
+  faceLoginCheckStatus(){
+    return new Promise((resolve, reject) => {
+      FB.getLoginStatus((response) => {
+        response.status === 'connected' ? resolve(response) : reject(response);
+      });
+    })
+  },
+  facebookLogin(){
+    return new Promise((resolve, reject) => {
+      FB.login((response) => {
+        response.status === 'connected' ? resolve(response.authResponse) : reject(response);
+      });
+    });
+  },
+  facebookLogout(){
+    return new Promise((resolve, reject) => {
+      FB.logout((response) => {
+        response.authResponse ? resolve(response) : reject(response);
+      });
+    });
+  },
+  facebookLoginAccessToken(response) {
+    let config = {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        access_token: response.accessToken,
+        code: response.userID
+      })
+    };
+    return fetch('/api/v1/auth/facebook/', config).then(checkStatus).then(parseJSON);
+  },
 }
 
 export default AuthenticateAPI;

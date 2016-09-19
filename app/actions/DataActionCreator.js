@@ -10,7 +10,9 @@ import {
   SHOW_ROOT_FOLDER,
   FOLDER_ADD_SUCCESS,
   IMAGE_DELETE_SUCCESS,
-  IMAGE_DELETE_FAILURE
+  IMAGE_DELETE_FAILURE,
+  IMAGE_DETAILS_UPDATE_SUCCESS,
+  IMAGE_DETAILS_UPDATE_FAILURE
 } from '../constants';
 
 const DataActionCreator = {
@@ -59,6 +61,14 @@ const DataActionCreator = {
       ImageAPI.updateFolder(id, name).then(
         (response) => dispatch({ type: FOLDER_UPDATE_SUCESS, folder: response}),
         (error) => dispatch({type: FOLDER_UPDATE_FAILURE })
+      );
+    };
+  },
+  updateImage(id, updateObject) {
+    return (dispatch) => {
+      ImageAPI.updateImage(id, updateObject).then(
+        (response) => dispatch({ type: IMAGE_DETAILS_UPDATE_SUCCESS, image: response }),
+        (error) => dispatch({ type: IMAGE_DETAILS_UPDATE_FAILURE })
       );
     };
   }

@@ -15,7 +15,7 @@ class Navigation extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavDropdown eventKey={1} title="Malikwahab" id="basic-nav-dropdown">
+            <NavDropdown eventKey={1} title={this.props.username} id="basic-nav-dropdown">
               <MenuItem eventKey={1.1} onClick={this.props.logout}>Logout</MenuItem>
             </NavDropdown>
           </Nav>
@@ -26,7 +26,14 @@ class Navigation extends Component {
 }
 
 Navigation.proptypes = {
-  logout: PropTypes.func
+  logout: PropTypes.func,
+  username: PropTypes.string
+}
+
+const mapStateToProps = (state) => {
+  return {
+    username: state.authenticate.username
+  }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -34,4 +41,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
