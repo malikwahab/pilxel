@@ -46,6 +46,8 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.facebook',
     # nose for testing
     'django_nose',
+    # data clean up
+    'django_cleanup',
 )
 
 MIDDLEWARE_CLASSES = (
