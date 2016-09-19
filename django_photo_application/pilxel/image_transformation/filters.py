@@ -42,6 +42,9 @@ class FilterImage():
             return output.apply()
         if filter_type == "papercut":
             output = PaperCut(self.image)
+            return output.apply(threshold=30)
+        if filter_type == "mosaic":
+            output = Mosaic(self.image)
             return output.apply()
         if filter_type == "pencil":
             output = Pencil(self.image)

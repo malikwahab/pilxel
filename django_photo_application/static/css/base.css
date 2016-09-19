@@ -1,0 +1,863 @@
+body {
+    margin: 0;
+    font-family: "Helvetica"
+}
+
+.container.landing-container {
+    background: url('../img/background_image.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 30px;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+.landing {
+    border: 4px solid #fff;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+.logo {
+    display: block;
+    color: #fff;
+    background: url('../img/logo.png') no-repeat fixed;
+    background-position: center 30%;
+    width: 500px;
+    height: 60%;
+    margin: 0 auto;
+}
+
+.landing-button-container {
+    width: 200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.landing-container form {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.landing-container form .form-control {
+    outline: 0;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none !important;
+}
+
+.btn.pilxel-button, .btn.pilxel-button:hover {
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 0px;
+    color: #fff;
+    margin: 10px;
+}
+
+
+/* side bar */
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.50);
+}
+
+.sidebar-nav {
+    position: absolute;
+    top: 50px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+.sidebar-nav .link-text {
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav .material-icons {
+    position: relative;
+    top: 8px;
+}
+
+.sidebar-nav .btn {
+    margin-right: 5px;
+}
+.new-folder-input {
+    padding-left: 35px;
+    padding-right: 15px;
+}
+
+.img-container {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
+    padding: 10px;
+    cursor: pointer;
+    width: 148px;
+    margin-bottom: 50px;
+}
+
+.img-btn {
+    padding-top: 15px;
+}
+
+.img-btn .glyphicon-edit {
+    margin-right: 45px;
+}
+
+.img-btn .glyphicon-trash {
+    float: right;
+    color: red;
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.modal-dialog {
+    width: 800px;
+}
+
+.edit-img-details {
+    padding-left: 10px;
+}
+
+.edit-img-details .btn {
+    margin-right: 10px;
+}
+.img-info ul {
+    list-style: none;
+    border-left: 1px solid #999;
+}
+
+.img-info li {
+    margin-bottom: 15px;
+}
+
+.img-details-title {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+}
+
+.modal-body img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.image-info-btn {
+    padding-top: 20px;
+}
+
+.image-info-btn .btn {
+    margin-left: 20px;
+}
+
+.image-info-edit-btn, .image-info-edit-btn:hover {
+    background-color: #4A90E2;
+    border-color: #4A90E2;
+    color: #fff;
+}
+
+.image-info-edit-btn:focus, .image-info-edit-btn:active, .image-info-edit-btn:active:focus {
+    background-color: #4A70E2;
+    border-color: #4A70E2;
+    color: #fff;
+}
+
+.page-content-wrapper {
+    position: absolute;
+    left: 250px;
+    padding: 20px;
+    width: 75%;
+    top: 50px;
+}
+
+.edit-image-modal .modal-content {
+    background-color: #333;
+    color: #fff;
+}
+
+.edit-image-modal .modal-header button span {
+    color: #fff;
+}
+
+.edit-image-modal .modal-dialog {
+    width: 500px;
+}
+
+.edit-btn-container {
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #fff;
+}
+
+.edit-btn {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.edit-btn:hover, .filter-btn:hover {
+    color: #bebebe;
+}
+
+.edit-btn .material-icons {
+    font-size: 20px;
+}
+
+.edit-btn-title {
+    text-align: center;
+    display: block;
+    font-size: 12px;
+}
+
+.img-edit-container {
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.is-editing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.84);
+    transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+    transition-duration: 300ms;
+    transition-property: all;
+}
+
+.is-editing img {
+    position: relative;
+    top: 40%;
+    left: 40%;
+}
+
+/* switch */
+
+.u-switch {
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 14px;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.u-switch input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.u-switch .track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 7px;
+    background-color: #cccccc;
+}
+
+.u-switch .button {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    right: 11px;
+    left: 3px;
+    background-color: #fff;
+    border-radius: 9px;
+    transition: all 100ms ease;
+    -webkit-transition: all 100ms ease;
+}
+
+.u-switch.is-checked .track {
+    background-color: #5faee3;
+}
+
+.u-switch.is-checked .button {
+    right: 2px;
+    left: 11px;
+}
+
+
+/* End of Switch */
+
+
+/* Input Slider */
+
+.range-edit-slider {
+    width: 85%;
+    display: inline-block;
+    position: relative;
+    top: -17px;
+    margin-right: 5px;
+}
+
+.InputRange-slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #3f51b5;
+    border: 1px solid #3f51b5;
+    border-radius: 100%;
+    cursor: pointer;
+    display: block;
+    height: 1.3rem;
+    margin-left: -0.5rem;
+    margin-top: -0.8rem;
+    outline: none;
+    position: absolute;
+    top: 50%;
+    transition: -webkit-transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    width: 1.3rem;
+}
+
+.InputRange-slider:active {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.InputRange-slider:focus {
+    box-shadow: 0 0 0 5px rgba(63, 81, 181, 0.2);
+}
+
+.InputRange.is-disabled .InputRange-slider {
+    background: #cccccc;
+    border: 1px solid #cccccc;
+    box-shadow: none;
+    -webkit-transform: none;
+    transform: none;
+}
+
+.InputRange-sliderContainer {
+    transition: left 0.3s ease-out;
+}
+
+.InputRange-label {
+    color: #aaaaaa;
+    font-family: "Helvetica Neue", san-serif;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.InputRange-label--min, .InputRange-label--max {
+    bottom: -1.4rem;
+    position: absolute;
+}
+
+.InputRange-label--min {
+    left: 0;
+}
+
+.InputRange-label--max {
+    right: 0;
+}
+
+.InputRange-label--value {
+    position: absolute;
+    top: -1.8rem;
+}
+
+.InputRange-labelContainer {
+    left: -50%;
+    position: relative;
+}
+
+.InputRange-label--max .InputRange-labelContainer {
+    left: 50%;
+}
+
+.InputRange-track {
+    background: #eeeeee;
+    border-radius: 0.3rem;
+    display: block;
+    height: 0.5rem;
+    position: relative;
+    transition: left 0.3s ease-out, width 0.3s ease-out;
+}
+
+.InputRange.is-disabled .InputRange-track {
+    background: #eeeeee;
+}
+
+.InputRange-track--container {
+    left: 0;
+    margin-top: -0.15rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.InputRange-track--active {
+    background: #3f51b5;
+}
+
+.InputRange {
+    cursor: pointer;
+    height: 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.edit-action-btn .material-icons {
+    padding-left: 5px;
+    font-size: 14px;
+    position: relative;
+    top: 3px;
+}
+
+.save-down-wrapper {
+    display: inline-block;
+}
+
+.save-down-wrapper .btn-success {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.auto-save-btn {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+}
+
+.auto-save-text {
+    font-size: 10px;
+    display: inline-block;
+}
+
+.filters .edit-btn {
+    float: left;
+    position: relative;
+    top: 15px;
+}
+
+.filters .edit-btn .material-icons {
+    font-size: 40px;
+}
+
+.filter-btn {
+    display: inline-block;
+    width: 70px;
+    cursor: pointer;
+}
+
+.filter-btn img {
+    width: 60px;
+}
+
+.filter-btn-container {
+    overflow-x: scroll;
+}
+
+.filter-btn-wrapper {
+    width: 1600px;
+    text-align: start;
+}
+
+.filter-btn-container::-webkit-scrollbar {
+    width: 20px;
+}
+
+.filter-btn-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.filter-btn-container::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+}
+
+
+/* React Crop */
+
+.ReactCrop {
+    position: relative;
+    display: inline-block;
+    cursor: crosshair;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.ReactCrop.ReactCrop--disabled {
+    cursor: inherit;
+}
+
+.ReactCrop:focus {
+    outline: none;
+}
+
+.ReactCrop--image {
+    display: block;
+    max-width: 100%;
+}
+
+.ReactCrop--image-copy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+}
+
+.ReactCrop--crop-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.ReactCrop--crop-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    box-sizing: border-box;
+    cursor: move;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0.7) 50%), linear-gradient(to right, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0.7) 50%), linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0.7) 50%), linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 50%, rgba(0, 0, 0, 0.7) 50%);
+    padding: 1px;
+    background-size: 10px 1px, 10px 1px, 1px 10px, 1px 10px;
+    background-position: 0 0, 0 100%, 0 0, 100% 0;
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    animation: marching-ants 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+
+.ReactCrop--disabled .ReactCrop--crop-selection {
+    cursor: inherit;
+}
+
+.ReactCrop-ellipse .ReactCrop--crop-selection {
+    background-image: none;
+    border: 1px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 100%;
+}
+
+@keyframes marching-ants {
+    0% {
+        background-position: 0 0, 0 100%, 0 0, 100% 0;
+    }
+    100% {
+        background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px;
+    }
+}
+
+.ReactCrop--drag-handle {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-sizing: border-box;
+    outline: 1px solid transparent;
+}
+
+.ReactCrop .ord-nw {
+    top: 0;
+    left: 0;
+    margin-top: -4px;
+    margin-left: -4px;
+    cursor: nw-resize;
+}
+
+.ReactCrop .ord-n {
+    top: 0;
+    left: 50%;
+    margin-top: -4px;
+    margin-left: -4px;
+    cursor: n-resize;
+}
+
+.ReactCrop .ord-ne {
+    top: 0;
+    right: 0;
+    margin-top: -4px;
+    margin-right: -4px;
+    cursor: ne-resize;
+}
+
+.ReactCrop .ord-e {
+    top: 50%;
+    right: 0;
+    margin-top: -4px;
+    margin-right: -4px;
+    cursor: e-resize;
+}
+
+.ReactCrop .ord-se {
+    bottom: 0;
+    right: 0;
+    margin-bottom: -4px;
+    margin-right: -4px;
+    cursor: se-resize;
+}
+
+.ReactCrop .ord-s {
+    bottom: 0;
+    left: 50%;
+    margin-bottom: -4px;
+    margin-left: -4px;
+    cursor: s-resize;
+}
+
+.ReactCrop .ord-sw {
+    bottom: 0;
+    left: 0;
+    margin-bottom: -4px;
+    margin-left: -4px;
+    cursor: sw-resize;
+}
+
+.ReactCrop .ord-w {
+    top: 50%;
+    left: 0;
+    margin-top: -4px;
+    margin-left: -4px;
+    cursor: w-resize;
+}
+
+.ReactCrop--disabled .ReactCrop--drag-handle {
+    cursor: inherit;
+}
+
+.ReactCrop--drag-bar {
+    position: absolute;
+}
+
+.ReactCrop--drag-bar.ord-n {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    margin-top: -4px;
+}
+
+.ReactCrop--drag-bar.ord-e {
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    margin-right: -4px;
+}
+
+.ReactCrop--drag-bar.ord-s {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    margin-bottom: -4px;
+}
+
+.ReactCrop--drag-bar.ord-w {
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    margin-left: -4px;
+}
+
+.ReactCrop-ellipse .ReactCrop--drag-bar,
+.ReactCrop-new-crop .ReactCrop--drag-bar,
+.ReactCrop-new-crop .ReactCrop--drag-handle,
+.ReactCrop-fixed-aspect .ReactCrop--drag-bar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .ReactCrop--drag-handle {
+        width: 17px;
+        height: 17px;
+    }
+    .ReactCrop .ord-nw {
+        margin-top: -8px;
+        margin-left: -8px;
+    }
+    .ReactCrop .ord-n {
+        margin-top: -8px;
+        margin-left: -8px;
+    }
+    .ReactCrop .ord-ne {
+        margin-top: -8px;
+        margin-right: -8px;
+    }
+    .ReactCrop .ord-e {
+        margin-top: -8px;
+        margin-right: -8px;
+    }
+    .ReactCrop .ord-se {
+        margin-bottom: -8px;
+        margin-right: -8px;
+    }
+    .ReactCrop .ord-s {
+        margin-bottom: -8px;
+        margin-left: -8px;
+    }
+    .ReactCrop .ord-sw {
+        margin-bottom: -8px;
+        margin-left: -8px;
+    }
+    .ReactCrop .ord-w {
+        margin-top: -8px;
+        margin-left: -8px;
+    }
+    .ReactCrop--drag-bar.ord-n {
+        height: 14px;
+        margin-top: -12px;
+    }
+    .ReactCrop--drag-bar.ord-e {
+        width: 14px;
+        margin-right: -12px;
+    }
+    .ReactCrop--drag-bar.ord-s {
+        height: 14px;
+        margin-bottom: -12px;
+    }
+    .ReactCrop--drag-bar.ord-w {
+        width: 14px;
+        margin-left: -12px;
+    }
+}
+
+.img-name-input {
+    color: #333;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-top: 20px;
+}
+.drop-zone-container div {
+    margin: 0 auto;
+}
+
+.add-image {
+    display: block;
+    position: fixed;
+    bottom: 50px;
+    right: 80px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #d23f31;
+    padding: 14px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.add-image .material-icons {
+    font-size: 30px;
+}
+
+.add-image:hover {
+    color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
+}
+
+.folder {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.folder .material-icons {
+    font-size: 150px;
+    color: #4A90E2;
+    margin-left: -10px;
+}
+
+.folder-name {
+    display: block;
+    margin-top: -20px;
+    margin-left: 30px;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-default {
+    background-color: #4A90E2;
+    border-color: #4A90E2;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand, .navbar-default .navbar-nav>.open>a:hover {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-nav>li>a:hover {
+    color: #555;
+    background-color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #fff;
+}
+
+.form-contro::-webkit-input-placeholder {
+    color: #fff;
+}
+
+.form-control:-moz-placeholder {
+    color: #fff;
+}
+
+.form-control::-moz-placeholder {
+    color: #fff;
+}
+
+.form-control:-ms-input-placeholder {
+    color: #fff;
+}

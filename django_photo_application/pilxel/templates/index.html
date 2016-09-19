@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="utf-8" />
+        <title>PilXel - Your friendly photoEditor</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href= {% static "css/base.css" %} rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <div id="root" ></div>
+    </body>
+
+    <script src= {% static "js/bundle.js" %} ></script>
+</html>
