@@ -47,7 +47,7 @@ class ImageInfoModal extends Component {
     });
   }
   shareImage(){
-    facebookAPI.shareImage(this.props.currentImage, this.props.details);
+    facebookAPI.shareImage(this.props.currentImage);
   }
   handleFieldChange(event) {
     event.preventDefault();

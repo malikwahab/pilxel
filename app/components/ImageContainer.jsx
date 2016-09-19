@@ -4,9 +4,13 @@ import InfoModalActionCreator from '../actions/InfoModalActionCreator';
 import EditModalActionCreator from '../actions/EditModalActionCreator';
 import DataActionCreator from '../actions/DataActionCreator';
 import { connect } from 'react-redux';
+import { facebookAPI } from '../api/AppAPI';
 
 
 class ImageContainer extends Component {
+    shareImage(){
+      facebookAPI.shareImage(this.props.id);
+    }
     render(){
         return(
             <Col md={3} sm={4}>
@@ -16,7 +20,7 @@ class ImageContainer extends Component {
                          onClick={this.props.openInfoModal.bind(null, this.props.id)} />
                     <div className="img-btn">
                         <Glyphicon glyph="edit" onClick={this.props.openEditModal.bind(null, this.props.id)}/>
-                        <Glyphicon glyph="share-alt" />
+                        <Glyphicon glyph="share-alt" onClick={this.shareImage.bind(this)} />
                         <Glyphicon glyph="trash" onClick={this.props.deleteImage.bind(null, this.props.id)}/>
                     </div>
                 </div>

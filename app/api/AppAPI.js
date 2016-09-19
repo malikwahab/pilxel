@@ -215,17 +215,14 @@ export const ImageAPI = {
 }
 
 export let facebookAPI = {
-  shareImage(id, imageDetails) {
+  shareImage(id) {
     FB.ui({
       method: 'share_open_graph',
       action_type: 'og.shares',
       action_properties: JSON.stringify({
         object: {
           'og:url': "http://buppli.herokuapp.com",
-          'og:title': imageDetails.name,
-          'og:og:image:width': imageDetails.width,
-          'og:image:height': imageDetails.height,
-          'og:image': "http://buppli.herokuapp.com/static/images/background.jpg"
+          'og:image': `/api/v1/images/${id}`
         }
       })
     });
