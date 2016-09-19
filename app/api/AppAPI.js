@@ -11,7 +11,8 @@ window.fbAsyncInit = function () {
 (function (d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) {
-    return; }
+    return;
+  }
   js = d.createElement(s);
   js.id = id;
   js.src = "//connect.facebook.net/en_US/sdk.js";
@@ -74,13 +75,41 @@ let AuthenticateAPI = {
       .then(checkStatus)
       .then(parseJSON);
   },
+  verifyToken(token) {
+    const config = {
+      method: "post",
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ token: token })
+    }
+    return fetch('/api/v1/auth/token-verify/', config).then(checkStatus);
+  },
+  refreshToken(token) {
+    const config = {
+      method: "post",
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ token: token })
+    }
+    return fetch('/api/v1/auth/token-refresh/', config)
+      .then(checkStatus)
+      .then(parseJSON);
+  }
 };
 
 export const ImageAPI = {
+
   getImageDetails(id) {
     let config = {
       method: 'get',
-      headers: authHeader
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
     };
     return fetch(`/api/v1/image-details/${id}/`, config)
       .then(checkStatus)
@@ -89,7 +118,10 @@ export const ImageAPI = {
   editImage(id, editObject) {
     let config = {
       method: "put",
-      headers: authHeader,
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(editObject)
     };
     return fetch(`/api/v1/images/${id}/`, config)
@@ -118,21 +150,30 @@ export const ImageAPI = {
   fetchImages() {
     let config = {
       method: "get",
-      headers: authHeader
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
     };
     return fetch('/api/v1/images/', config).then(checkStatus).then(parseJSON);
   },
   fetchFolders() {
     let config = {
       method: "get",
-      headers: authHeader
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
     };
     return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
   },
   addFolder(name) {
     let config = {
       method: "post",
-      headers: authHeader,
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ name: name })
     };
     return fetch('/api/v1/folders/', config).then(checkStatus).then(parseJSON);
@@ -140,14 +181,20 @@ export const ImageAPI = {
   deleteImage(id) {
     let config = {
       method: "delete",
-      headers: authHeader
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
     };
     return fetch(`/api/v1/images/${id}/`, config).then(checkStatus);
   },
   updateFolder(id, name) {
     let config = {
       method: "put",
-      headers: authHeader,
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ name: name })
     };
     return fetch(`/api/v1/folder/${id}/`, config).then(checkStatus).then(
@@ -156,45 +203,48 @@ export const ImageAPI = {
   updateImage(id, updateObject) {
     let config = {
       method: "put",
-      headers: authHeader,
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(updateObject)
     };
     return fetch(`/api/v1/image-details/${id}/`, config).then(checkStatus)
-    .then(parseJSON);
+      .then(parseJSON);
   }
 }
 
 export let facebookAPI = {
-  shareImage(id, imageDetails){
-      FB.ui({
-        method: 'share_open_graph',
-        action_type: 'og.shares',
-        action_properties: JSON.stringify({
-            object : {
-               'og:url': "http://buppli.herokuapp.com",
-               'og:title': imageDetails.name,
-               'og:og:image:width': imageDetails.width,
-               'og:image:height': imageDetails.height,
-               'og:image': "http://buppli.herokuapp.com/static/images/background.jpg"
-            }
-        })
+  shareImage(id, imageDetails) {
+    FB.ui({
+      method: 'share_open_graph',
+      action_type: 'og.shares',
+      action_properties: JSON.stringify({
+        object: {
+          'og:url': "http://buppli.herokuapp.com",
+          'og:title': imageDetails.name,
+          'og:og:image:width': imageDetails.width,
+          'og:image:height': imageDetails.height,
+          'og:image': "http://buppli.herokuapp.com/static/images/background.jpg"
+        }
+      })
     });
   },
-  faceLoginCheckStatus(){
+  facebookLogin() {
     return new Promise((resolve, reject) => {
       FB.getLoginStatus((response) => {
-        response.status === 'connected' ? resolve(response) : reject(response);
+        if (response.status === 'connected') {
+          resolve(response.authResponse)
+        } else {
+          FB.login((response) => {
+            response.status === 'connected' ? resolve(response.authResponse) :
+              reject(response);
+          });
+        }
       });
     })
   },
-  facebookLogin(){
-    return new Promise((resolve, reject) => {
-      FB.login((response) => {
-        response.status === 'connected' ? resolve(response.authResponse) : reject(response);
-      });
-    });
-  },
-  facebookLogout(){
+  facebookLogout() {
     return new Promise((resolve, reject) => {
       FB.logout((response) => {
         response.authResponse ? resolve(response) : reject(response);
@@ -212,7 +262,8 @@ export let facebookAPI = {
         code: response.userID
       })
     };
-    return fetch('/api/v1/auth/facebook/', config).then(checkStatus).then(parseJSON);
+    return fetch('/api/v1/auth/facebook/', config).then(checkStatus).then(
+      parseJSON);
   },
 }
 

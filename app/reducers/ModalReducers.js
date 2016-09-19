@@ -1,5 +1,5 @@
 import { SHOW_INFO_MODAL, CLOSE_INFO_MODAL, IMAGE_DETAILS_SUCCESS,
-  SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, IMAGE_EDIT_SUCCESS, TOGGLE_UPLOAD_MODAL, FACEBOOK_SHARE_SUCCESS } from '../constants';
+  SHOW_EDIT_MODAL, CLOSE_EDIT_MODAL, IMAGE_EDIT_SUCCESS, TOGGLE_UPLOAD_MODAL, FACEBOOK_SHARE_SUCCESS, LOGOUT } from '../constants';
 
 const initialState = {
   infoModalShow: false,
@@ -9,7 +9,7 @@ const initialState = {
   imageDetails: {}
 }
 
-export const modalShow = (state = initialState, action) => {
+const modalShow = (state = initialState, action) => {
   switch (action.type) {
   case SHOW_INFO_MODAL:
     return Object.assign({}, state, { infoModalShow: true, currentInfoImage: action
@@ -24,7 +24,11 @@ export const modalShow = (state = initialState, action) => {
     return Object.assign({}, state, { editModalShow: false });
   case TOGGLE_UPLOAD_MODAL:
     return Object.assign({}, state, { uploadModalShow: !state.uploadModalShow });
+  case LOGOUT:
+    return Object.assign({}, state, initialState);
   default:
     return state;
   }
-}
+};
+
+export default modalShow;

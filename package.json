@@ -17,6 +17,7 @@
     "babel-preset-react": "~6.5.*",
     "history": "^1.13.1",
     "immutability-helper": "^2.0.0",
+    "jwt-decode": "^2.1.0",
     "normalize.css": "^4.2.0",
     "react-addons-css-transition-group": "^0.14.8",
     "react-addons-update": "^15.3.1",

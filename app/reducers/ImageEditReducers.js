@@ -20,6 +20,7 @@ import {
   TOGGLE_MAIN_IMAGE,
   TOGGLE_CROP_IMAGE,
   SET_CROP_STATE,
+  LOGOUT
 } from '../constants';
 
 const initialState = {
@@ -87,6 +88,8 @@ export const imageEdit = (state = initialState, action) => {
     return Object.assign({}, state, {cropImageShow: !state.cropImageShow});
   case SET_CROP_STATE:
     return Object.assign({}, state, {cropObject: action.cropState});
+  case LOGOUT:
+    return Object.assign({}, state, {initialState});
   default:
     return state;
   }

@@ -32,7 +32,7 @@ Navigation.proptypes = {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.authenticate.username
+    username: state.authenticate.userData.username
   }
 }
 const mapDispatchToProps = (dispatch) => {

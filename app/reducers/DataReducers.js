@@ -15,7 +15,8 @@ import {
   FOLDER_UPDATE_SUCESS,
   FOLDER_UPDATE_FAILURE,
   IMAGE_DETAILS_UPDATE_FAILURE,
-  IMAGE_DETAILS_UPDATE_SUCCESS
+  IMAGE_DETAILS_UPDATE_SUCCESS,
+  LOGOUT
 } from '../constants';
 
 const initialState = {
@@ -47,6 +48,8 @@ const data = (state = initialState, action) => {
     case IMAGE_DETAILS_UPDATE_SUCCESS:
       imageIndex = getImageIndex(state, action.image.id);
       return update(state, {images: { [imageIndex] : {$set: action.image}}});
+    case LOGOUT:
+      return update(state, {$set: initialState});
     default:
       return state;
   }
