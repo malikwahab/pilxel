@@ -233,7 +233,7 @@ export let facebookAPI = {
         object: {
           'og:url': "https://pilxel.herokuapp.com/",
           'og:title': "Shared with PilXel",
-          'og:image': `/api/v1/images/${id}`
+          'og:image': `https://pilxel.herokuapp.com/api/v1/images/${id}/`
         }
       })
     });
