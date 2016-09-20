@@ -3,9 +3,11 @@ import {Grid, Row, Col} from 'react-bootstrap';
 import ImageContainer from './ImageContainer';
 import ImageInfoModal from './ImageInfoModal';
 import ImageEditorModal from './ImageEditorModal';
+import FolderInfoModal from './FolderInfoModal';
 import UploadModal from './UploadModal';
 import Folder from './Folder';
 import ImageUploadActionCreator from '../actions/ImageUploadActionCreator';
+import FolderInfoActionCreator from '../actions/FolderInfoActionCreator';
 import DataActionCreator from '../actions/DataActionCreator';
 import { connect } from 'react-redux';
 
@@ -19,7 +21,7 @@ class PilxelContent extends Component {
       <Grid fluid className="page-content-wrapper">
         <Row className="show-grid">
           {this.props.isRootFolder ? this.props.folders.map((folder, i) => {
-              return(<Folder key={i} name={folder.name} open={this.props.showFolder.bind(null, folder.id)}/>)
+              return(<Folder key={i} name={folder.name} open={this.props.showFolderInfo.bind(null, folder)}/>)
           }) : null }
           {this.props.images.map((image, i) => {
               if(image.folder == this.props.displayedImageFolder){
@@ -29,6 +31,7 @@ class PilxelContent extends Component {
         </Row>
         <ImageInfoModal />
         <ImageEditorModal />
+        <FolderInfoModal />
         <UploadModal />
         <a className="add-image" onClick={this.props.showUploadModal}><i className="material-icons">add_a_photo</i></a>
       </Grid>
@@ -56,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
     showUploadModal: () => dispatch(ImageUploadActionCreator.toggleUploadModal()),
     fetchImages: () => dispatch(DataActionCreator.fetchImages()),
     fetchFolders: () => dispatch(DataActionCreator.fetchFolders()),
-    showFolder: (id) => dispatch(DataActionCreator.showFolder(id))
+    showFolderInfo: (folder) => dispatch(FolderInfoActionCreator.showFolderInfo(folder))
   }
 }
 
