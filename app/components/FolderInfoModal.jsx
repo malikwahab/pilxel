@@ -49,7 +49,7 @@ class FolderInfoModal extends Component {
               <InputGroup>
                 <FormControl type="text" name="name" value={this.state.name} onChange={this.handleFieldChange.bind(this)} placeholder="New Folder Name"/>
                 <InputGroup.Button>
-                  <Button bsStyle="info" onClick={this.props.updateFolder.bind(null, this.props.folder.id, this.state.name)}>Save</Button>
+                  <Button bsStyle="info" onClick={() => {this.props.updateFolder(this.props.folder.id, this.state.name); this.setState({name: ""})}}>Save</Button>
                 </InputGroup.Button>
               </InputGroup>
             </FormGroup> : null
@@ -57,7 +57,7 @@ class FolderInfoModal extends Component {
           <div className="folder-details-btn">
             <Button bsStyle="primary" bsSize="small" onClick={() => {this.props.openFolder(this.props.folder.id); this.props.closeFolderInfo()}}>Open</Button>
             <Button bsStyle="info" bsSize="small" onClick={this.toggleEdit.bind(this)}>Change Name</Button>
-            <Button bsStyle="danger" bsSize="small">Delete</Button>
+            <Button bsStyle="danger" bsSize="small" onClick={() => {this.props.deleteFolder(this.props.folder.id); this.props.closeFolderInfo()}}>Delete</Button>
           </div>
         </Modal.Body>
       </Modal>
@@ -69,6 +69,7 @@ FolderInfoModal.proptypes = {
   folderInfoModalShow: PropTypes.bool,
   closeFolderInfo: PropTypes.func,
   openFolder: PropTypes.func,
+  deleteFolder: PropTypes.func,
   folder: PropTypes.object
 }
 
@@ -83,7 +84,8 @@ const mapDispatchToProps = (dispatch) => {
   return{
     closeFolderInfo: () => dispatch(FolderInfoActionCreator.closeFolderInfo()),
     openFolder: (id) => dispatch(DataActionCreator.showFolder(id)),
-    updateFolder: (id, name) => dispatch(DataActionCreator.updateFolder(id, name))
+    updateFolder: (id, name) => dispatch(DataActionCreator.updateFolder(id, name)),
+    deleteFolder: (id) => dispatch(DataActionCreator.deleteFolder(id))
   }
 }
 

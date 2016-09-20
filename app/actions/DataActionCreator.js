@@ -14,7 +14,9 @@ import {
   IMAGE_DETAILS_UPDATE_SUCCESS,
   IMAGE_DETAILS_UPDATE_FAILURE,
   FOLDER_UPDATE_SUCESS,
-  FOLDER_UPDATE_FAILURE
+  FOLDER_UPDATE_FAILURE,
+  FOLDER_DELETE_FAILURE,
+  FOLDER_DELETE_SUCCESS
 } from '../constants';
 
 const DataActionCreator = {
@@ -73,7 +75,15 @@ const DataActionCreator = {
         (error) => dispatch({ type: IMAGE_DETAILS_UPDATE_FAILURE })
       );
     };
-  }
+  },
+  deleteFolder(id){
+    return(dispatch) => {
+      ImageAPI.deleteFolder(id).then(
+        (response) => dispatch({ type: FOLDER_DELETE_SUCCESS, id}),
+        (error) => dispatch({ type: FOLDER_DELETE_FAILURE })
+      );
+    };
+  },
 };
 
 export default DataActionCreator;

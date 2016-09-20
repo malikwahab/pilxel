@@ -200,6 +200,16 @@ export const ImageAPI = {
     return fetch(`/api/v1/folders/${id}/`, config).then(checkStatus).then(
       parseJSON);
   },
+  deleteFolder(id) {
+    let config = {
+      method: "delete",
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
+    };
+    return fetch(`/api/v1/folders/${id}/`, config).then(checkStatus);
+  },
   updateImage(id, updateObject) {
     let config = {
       method: "put",
