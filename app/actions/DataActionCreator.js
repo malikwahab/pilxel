@@ -55,7 +55,7 @@ const DataActionCreator = {
   deleteImage(id) {
     return (dispatch) => {
       ImageAPI.deleteImage(id).then(
-        (response) => dispatch({ type: IMAGE_DELETE_SUCCESS, id: id}),
+        (response) => dispatch({ type: IMAGE_DELETE_SUCCESS, id: id }),
         (error) => dispatch({ type: IMAGE_DELETE_FAILURE })
       );
     };
@@ -63,27 +63,38 @@ const DataActionCreator = {
   updateFolder(id, name) {
     return (dispatch) => {
       ImageAPI.updateFolder(id, name).then(
-        (response) => dispatch({ type: FOLDER_UPDATE_SUCESS, folder: response}),
-        (error) => dispatch({type: FOLDER_UPDATE_FAILURE })
+        (response) => dispatch({ type: FOLDER_UPDATE_SUCESS, folder: response }),
+        (error) => dispatch({ type: FOLDER_UPDATE_FAILURE })
       );
     };
   },
   updateImage(id, updateObject) {
     return (dispatch) => {
       ImageAPI.updateImage(id, updateObject).then(
-        (response) => dispatch({ type: IMAGE_DETAILS_UPDATE_SUCCESS, image: response }),
+        (response) => dispatch({ type: IMAGE_DETAILS_UPDATE_SUCCESS,
+          image: response }),
         (error) => dispatch({ type: IMAGE_DETAILS_UPDATE_FAILURE })
       );
     };
   },
-  deleteFolder(id){
-    return(dispatch) => {
+  deleteFolder(id) {
+    return (dispatch) => {
       ImageAPI.deleteFolder(id).then(
-        (response) => dispatch({ type: FOLDER_DELETE_SUCCESS, id}),
+        (response) => dispatch({ type: FOLDER_DELETE_SUCCESS, id }),
         (error) => dispatch({ type: FOLDER_DELETE_FAILURE })
       );
     };
   },
+  downloadImage(src) {
+    var filename = "image.png";
+    var a = document.createElement('a');
+    a.href = src
+    a.download = filename;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
 };
 
 export default DataActionCreator;
