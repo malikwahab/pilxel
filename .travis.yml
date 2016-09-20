@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+  - pip install coveralls
+
+
+# command to run tests
+script:
+    - cd django_photo_application/
+    - python manage.py collectstatic --noinput --settings=django_photo_application.settings.test
+    - python manage.py test --settings=django_photo_application.settings.test
+
+after_success:
+  - coveralls
