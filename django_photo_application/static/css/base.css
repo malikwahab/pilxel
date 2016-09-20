@@ -55,6 +55,11 @@ body {
     box-shadow: none !important;
 }
 
+.alert {
+    width: 350px;
+    margin: 0 auto;
+    font-size: 10px;
+}
 .btn.pilxel-button, .btn.pilxel-button:hover {
     background-color: transparent;
     border: 2px solid #fff;

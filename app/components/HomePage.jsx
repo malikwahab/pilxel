@@ -5,6 +5,7 @@ import store from '../Store/AppStore';
 import LandingButton from './LandingButton';
 import SignUp from './SignUp';
 import Login from './Login';
+import ErrorAlert from './ErrorAlert';
 
 class HomePage extends Component {
 
@@ -13,6 +14,9 @@ class HomePage extends Component {
       <Grid className="landing-container">
         <Row className="show-grid landing">
           <span className="logo"/>
+          {this.props.authenticatError == "LOGIN" ? <ErrorAlert>Login failed. Check Username and Password</ErrorAlert> : null}
+          {this.props.authenticatError == "SIGNUP" ? <ErrorAlert>Unable to Sign you up, Try Again</ErrorAlert> : null}
+          {this.props.authenticatError == "FACEBOOK_LOGIN" ? <ErrorAlert>Login with facebook failed</ErrorAlert> : null}
           { this.props.LandingButtonShow ? <LandingButton />: null}
           { this.props.loginShow ? <Login /> : null }
           { this.props.signUpShow ? <SignUp />: null }
@@ -24,14 +28,16 @@ class HomePage extends Component {
 
 HomePage.propTypes = {
     loginShow: PropTypes.bool,
-    LandingButtonShow: PropTypes.bool
+    LandingButtonShow: PropTypes.bool,
+    authenticatError: PropTypes.string,
 }
 
 const mapStateToProps = (state) => {
     return {
         loginShow: state.showLogin.loginShow,
         LandingButtonShow: state.showLogin.LandingButtonShow,
-        signUpShow: state.showLogin.signUpShow
+        signUpShow: state.showLogin.signUpShow,
+        authenticatError: state.authenticate.authenticatError
     }
 }
 
