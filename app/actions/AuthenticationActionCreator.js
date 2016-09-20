@@ -4,7 +4,8 @@ import {
   AUTHENTICATE_REQUEST,
   LOGOUT,
   LOAD_USERDATA_SUCCESS,
-  LOAD_USERDATA_FAILURE
+  LOAD_USERDATA_FAILURE,
+  AUTH_VERIFICATION_FAILURE
 } from '../constants';
 import AuthenticateAPI, { facebookAPI } from '../api/AppAPI';
 import jwtDecode from 'jwt-decode';
@@ -19,7 +20,9 @@ const AuthenticationActionCreator = {
           localStorage.setItem('token', response.token);
           dispatch(this.loadUserData(response.token));
         },
-        (error) => dispatch({ type: AUTHENTICATE_FAILURE })
+        (error) => {
+            dispatch({ type: AUTHENTICATE_FAILURE, error: "LOGIN" })
+        }
       )
     }
   },
@@ -30,7 +33,7 @@ const AuthenticationActionCreator = {
         (response) => {
           login(credentials);
         },
-        (error) => dispatch({ type: AUTHENTICATE_FAILURE })
+        (error) => dispatch({ type: AUTHENTICATE_FAILURE, error: "SIGNUP" })
       )
     }
   },
@@ -50,10 +53,10 @@ const AuthenticationActionCreator = {
               localStorage.setItem('token', response.token);
               dispatch(this.loadUserData(response.token));
             },
-            (error) => dispatch({ type: AUTHENTICATE_FAILURE })
+            (error) => dispatch({ type: AUTHENTICATE_FAILURE, error: "FACEBOOK_LOGIN" })
           );
         },
-        (error) => dispatch({ type: AUTHENTICATE_FAILURE })
+        (error) => dispatch({ type: AUTHENTICATE_FAILURE, error: "FACEBOOK_LOGIN" })
       );
     };
   },
@@ -73,7 +76,7 @@ const AuthenticationActionCreator = {
       if (token) {
         dispatch(this.verifyToken(token));
       } else {
-        dispatch({ type: AUTHENTICATE_FAILURE });
+        dispatch({ type: AUTH_VERIFICATION_FAILURE });
       }
     };
   },
@@ -84,7 +87,7 @@ const AuthenticationActionCreator = {
           dispatch(this.loadUserData(token));
         },
         (error) => {
-          dispatch({ type: AUTHENTICATE_FAILURE });
+          dispatch({ type: AUTH_VERIFICATION_FAILURE });
         }
       );
     }

@@ -5,12 +5,14 @@ import {
     LOGOUT,
     LOAD_USERDATA_SUCCESS,
     LOAD_USERDATA_FAILURE,
+    AUTH_VERIFICATION_FAILURE,
 } from '../constants';
 
 const initialState = {
     isFetching: false,
     isAuthenticated: false,
     userData: null,
+    authenticatError: ""
 }
 
 export const authenticate = (state = initialState, action) => {
@@ -20,7 +22,9 @@ export const authenticate = (state = initialState, action) => {
         case AUTHENTICATE_SUCCESS:
           return Object.assign({}, state, {isFetching: false, isAuthenticated: true});
         case AUTHENTICATE_FAILURE:
-          return Object.assign({}, state, {isFetching:false, isAuthenticated: false, error: true});
+          return Object.assign({}, state, {isFetching:false, isAuthenticated: false, authenticatError: action.error});
+        case AUTH_VERIFICATION_FAILURE:
+          return Object.assign({}, state, {isAuthenticated: false});
         case LOGOUT:
         case LOAD_USERDATA_FAILURE:
           return Object.assign({}, state, {isAuthenticated: false, userData: null});
