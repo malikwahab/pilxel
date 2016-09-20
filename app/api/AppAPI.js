@@ -197,8 +197,18 @@ export const ImageAPI = {
       },
       body: JSON.stringify({ name: name })
     };
-    return fetch(`/api/v1/folder/${id}/`, config).then(checkStatus).then(
+    return fetch(`/api/v1/folders/${id}/`, config).then(checkStatus).then(
       parseJSON);
+  },
+  deleteFolder(id) {
+    let config = {
+      method: "delete",
+      headers: {
+        "Authorization": "JWT " + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      }
+    };
+    return fetch(`/api/v1/folders/${id}/`, config).then(checkStatus);
   },
   updateImage(id, updateObject) {
     let config = {

@@ -16,6 +16,8 @@ import {
   FOLDER_UPDATE_FAILURE,
   IMAGE_DETAILS_UPDATE_FAILURE,
   IMAGE_DETAILS_UPDATE_SUCCESS,
+  FOLDER_DELETE_SUCCESS,
+  FOLDER_DELETE_FAILURE,
   LOGOUT
 } from '../constants';
 
@@ -45,9 +47,12 @@ const data = (state = initialState, action) => {
     case FOLDER_UPDATE_SUCESS:
       let folderIndex = getFolderIndex(state, action.folder.id);
       return update(state, {folders: { [folderIndex] : {$set: action.folder}}});
+    case FOLDER_DELETE_SUCCESS:
+      let deleteFolderIndex = getFolderIndex(state, action.id);
+      return update(state, {folders: {$splice: [[deleteFolderIndex, 1]]}})
     case IMAGE_DETAILS_UPDATE_SUCCESS:
-      imageIndex = getImageIndex(state, action.image.id);
-      return update(state, {images: { [imageIndex] : {$set: action.image}}});
+      let UpdatedimageIndex = getImageIndex(state, action.image.id);
+      return update(state, {images: { [UpdatedimageIndex] : {$set: action.image}}});
     case LOGOUT:
       return update(state, {$set: initialState});
     default:
@@ -58,4 +63,4 @@ const data = (state = initialState, action) => {
 export default data;
 
 export const getImageIndex = (state, id) => state.images.findIndex((image)=>image.id == id);
-export const getFolderIndex = (state, id) => state.images.findIndex((folder)=>folder.id == id);
+export const getFolderIndex = (state, id) => state.folders.findIndex((folder)=>folder.id == id);
