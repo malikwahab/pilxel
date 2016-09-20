@@ -5,7 +5,6 @@ import ImageEditActionCreator from '../actions/ImageEditActionCreator';
 import DataActionCreator from '../actions/DataActionCreator';
 import { Button } from 'react-bootstrap';
 import EditButton from './EditButton';
-import saveAs from 'file-saver';
 
 
 class EditActionButtons extends Component {
