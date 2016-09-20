@@ -1,4 +1,4 @@
- ### PilXel - A mini-Photo Editor built with Django Rest framework and Reactjs
+### PilXel - A mini-Photo Editor built with Django Rest framework and Reactjs
 [![Build Status](https://travis-ci.org/andela-aabdulwahab/pilxel.svg?branch=develop)](https://travis-ci.org/andela-aabdulwahab/pilxel)
 [![Coverage Status](https://coveralls.io/repos/github/andela-aabdulwahab/pilxel/badge.svg?branch=develop)](https://coveralls.io/github/andela-aabdulwahab/pilxel?branch=develop)
 
