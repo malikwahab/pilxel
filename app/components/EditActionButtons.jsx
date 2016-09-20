@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import InputSwitch from 'react-input-switch';
 import { connect } from 'react-redux';
 import ImageEditActionCreator from '../actions/ImageEditActionCreator';
+import DataActionCreator from '../actions/DataActionCreator';
 import { Button } from 'react-bootstrap';
 import EditButton from './EditButton';
 
@@ -24,7 +25,7 @@ class EditActionButtons extends Component {
                             disabled={saveButtonState}>
                       Save<i className="material-icons">save</i>
                     </Button>
-                    <Button bsStyle="info" bsSize="xsmall">Download<i className="material-icons">file_download</i></Button>
+                    <Button bsStyle="info" bsSize="xsmall" onClick={DataActionCreator.downloadImage.bind(null, this.props.imageSrc)}>Download<i className="material-icons">file_download</i></Button>
                 </div>
             </div>
         )
@@ -37,14 +38,16 @@ EditActionButtons.proptypes = {
     currentEditImage: PropTypes.string,
     cancel: PropTypes.func,
     save: PropTypes.func,
-    toggleAutoSave: PropTypes.func
+    toggleAutoSave: PropTypes.func,
+    imageSrc: PropTypes.string
 }
 
 const mapStateToProps = (state) => {
     return {
         autoSave: state.imageEdit.autoSave,
         editObject: state.imageEdit.editObject,
-        currentEditImage: state.imageEdit.currentEditImage
+        currentEditImage: state.imageEdit.currentEditImage,
+        imageSrc: state.imageEdit.editImageSrc
     }
 }
 
@@ -52,7 +55,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         toggleAutoSave: () => dispatch(ImageEditActionCreator.toggleAutoSave()),
         cancel: (id) => dispatch(ImageEditActionCreator.cancel(id)),
-        save: (id, editObject) => dispatch(ImageEditActionCreator.save(id, editObject))
+        save: (id, editObject) => dispatch(ImageEditActionCreator.save(id, editObject)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(EditActionButtons);
