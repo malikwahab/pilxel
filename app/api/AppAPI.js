@@ -231,7 +231,8 @@ export let facebookAPI = {
       action_type: 'og.shares',
       action_properties: JSON.stringify({
         object: {
-          'og:url': "http://buppli.herokuapp.com",
+          'og:url': "https://pilxel.herokuapp.com/",
+          'og:title': "Shared with PilXel",
           'og:image': `/api/v1/images/${id}`
         }
       })
