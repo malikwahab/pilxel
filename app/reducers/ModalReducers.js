@@ -7,7 +7,7 @@ const initialState = {
   currentInfoImage: null,
   folderInfoModalShow: false,
   uploadModalShow: false,
-  currentInfoFolder: null,
+  currentInfoFolder: {},
   imageDetails: {}
 }
 
@@ -31,7 +31,7 @@ const modalShow = (state = initialState, action) => {
   case SHOW_FOLDER_INFO:
     return Object.assign({}, state, {folderInfoModalShow: true, currentInfoFolder: action.folder});
   case CLOSE_FOLDER_INFO:
-    return Object.assign({}, state, {folderInfoModalShow: false, currentInfoFolder: null});
+    return Object.assign({}, state, {folderInfoModalShow: false, currentInfoFolder: {}});
   default:
     return state;
   }

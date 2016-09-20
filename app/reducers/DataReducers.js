@@ -58,4 +58,4 @@ const data = (state = initialState, action) => {
 export default data;
 
 export const getImageIndex = (state, id) => state.images.findIndex((image)=>image.id == id);
-export const getFolderIndex = (state, id) => state.images.findIndex((folder)=>folder.id == id);
+export const getFolderIndex = (state, id) => state.folders.findIndex((folder)=>folder.id == id);

@@ -197,7 +197,7 @@ export const ImageAPI = {
       },
       body: JSON.stringify({ name: name })
     };
-    return fetch(`/api/v1/folder/${id}/`, config).then(checkStatus).then(
+    return fetch(`/api/v1/folders/${id}/`, config).then(checkStatus).then(
       parseJSON);
   },
   updateImage(id, updateObject) {

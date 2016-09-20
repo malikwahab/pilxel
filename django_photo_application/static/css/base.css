@@ -219,7 +219,7 @@ body {
     color: #fff;
 }
 
-.edit-image-modal .modal-dialog {
+.edit-image-modal .modal-dialog, .folder-info-modal .modal-dialog {
     width: 500px;
 }
 
@@ -274,6 +274,31 @@ body {
     left: 40%;
 }
 
+.folder-info-modal .material-icons {
+    font-size: 250px;
+    color: #666;
+}
+
+.folder-details {
+    text-align: center;
+}
+
+.folder-details-btn {
+    text-align: center;
+}
+
+.folder-details-btn .btn{
+    margin-right: 20px;
+}
+
+.folder-details span {
+    position: absolute;
+    display: inline-block;
+    font-size: 90px;
+    color: #fff;
+    left: 220px;
+    top: 30px;
+}
 /* switch */
 
 .u-switch {
